@@ -203,9 +203,9 @@ namespace BERT
                 return "NG";
             }
         }
-        public static string SetPpgPat(BertPortBase port, int ch, string pat)
+        public static string SetPpgPat(BertPortBase port, int ch, string pat, string len)
         {
-            CommandReply reply = CommandManager.GetInstance().Execute(port, "ppgpat " + ch.ToString() + " " + pat);
+            CommandReply reply = CommandManager.GetInstance().Execute(port, "ppgpat " + ch.ToString() + " " + pat + " " + len);
             if (reply.Result == CommandCode.OK)
             {
                 // 戻り値なし
@@ -255,6 +255,51 @@ namespace BERT
                 return "NG";
             }
         }
+
+        public static string SetPrgPat(BertPortBase port, int lineno, string[] sptext)
+        {
+
+            int ch = 0;
+
+            if (lineno == 1)
+            {
+                ch = 1;
+            }
+            else if(lineno == 2)
+            {
+                ch = 2;
+            }
+            else if (lineno == 3)
+            {
+                ch = 1;
+            }
+            else if (lineno == 4)
+            {
+                ch = 2;
+            }
+            else 
+            {
+                return "NG";
+            }
+
+
+            CommandReply reply;
+            for (int i = 1; i < 9; i++)
+            {
+                reply = CommandManager.GetInstance().Execute(port, "ppgprgpat " + ch.ToString() + " " + i.ToString() + " " + sptext[i] );
+                if (reply.Result != CommandCode.OK)
+                {
+                    return reply.Data[0][1];
+                }
+                reply = CommandManager.GetInstance().Execute(port, "edprgpat " + ch.ToString() + " " + i.ToString() + " " + sptext[i]);
+                if (reply.Result != CommandCode.OK)
+                {
+                    return reply.Data[0][1];
+                }
+            }
+            return "OK";
+        }
+
         public static string ResetFlag(BertPortBase port, int ch)
         {
             CommandReply reply = CommandManager.GetInstance().Execute(port, "resetflag " + ch.ToString());
@@ -367,6 +412,25 @@ namespace BERT
             {
                 return "NG";
 
+            }
+        }
+
+        public static string GetCH(BertPortBase port)
+        {
+            CommandReply reply = CommandManager.GetInstance().Execute(port, "ch");
+            if (reply.Result == CommandCode.OK)
+            {
+                // 応答1行目の2つめなので0-0
+                if (reply.Data.Count == 0)
+                {
+                    return "NG";
+                }
+
+                return reply.Data[0][0];
+            }
+            else
+            {
+                return "NG";
             }
         }
     }

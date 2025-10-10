@@ -77,6 +77,12 @@
     <Compile Include="CommandCode.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="CommandManager.cs" />
+    <Compile Include="PrgPtnSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrgPtnSetting.Designer.cs">
+      <DependentUpon>PrgPtnSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="System\Configuration\Configuration.cs" />
     <Compile Include="System\Configuration\ConfigurationManager.cs" />
@@ -98,6 +104,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BERT_MainForm.resx">
       <DependentUpon>BERT_MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrgPtnSetting.resx">
+      <DependentUpon>PrgPtnSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VersionInfo.resx">
       <DependentUpon>VersionInfo.cs</DependentUpon>

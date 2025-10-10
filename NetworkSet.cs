@@ -32,7 +32,7 @@ namespace BERT
             if (bertPort != null && bertPort.IsOpen && _bertPort.GetType() == typeof(BertPortSerial))
             {
                 PBOX_COM_STS.Image = PBOX_COM_STS.InitialImage;
-                ipaddr = Commands.IPGet(_parentForm.GetBertPort);
+                ipaddr = Commands.IPGet(_parentForm.GetBertPort1);
 
                 this.IP_Txt.Enabled = true;
                 this.IP_Txt.Text = ipaddr[0];
@@ -92,16 +92,16 @@ namespace BERT
 
                 if (_parentForm.DHCPFlag)
                 {
-                    rslt = Commands.SetDHCP(_parentForm.GetBertPort, 1);
+                    rslt = Commands.SetDHCP(_parentForm.GetBertPort1, 1);
                 }
                 else 
                 {
-                    rslt = Commands.SetDHCP(_parentForm.GetBertPort, 0);
-                    rslt = Commands.IPSet(_parentForm.GetBertPort, _parentForm.IpAddr, _parentForm.IpMask, _parentForm.GwAddr);
+                    rslt = Commands.SetDHCP(_parentForm.GetBertPort1, 0);
+                    rslt = Commands.IPSet(_parentForm.GetBertPort1, _parentForm.IpAddr, _parentForm.IpMask, _parentForm.GwAddr);
                 }
 
-                Commands.Save(_parentForm.GetBertPort);
-                Commands.Reset(_parentForm.GetBertPort);
+                Commands.Save(_parentForm.GetBertPort1);
+                Commands.Reset(_parentForm.GetBertPort1);
 
                 //if (this.InvokeRequired)
                 //{
@@ -138,7 +138,7 @@ namespace BERT
                 }
                 else
                 {
-                    ipaddr = Commands.IPGet(_parentForm.GetBertPort);
+                    ipaddr = Commands.IPGet(_parentForm.GetBertPort1);
 
                     IP_Txt.Enabled = true;
                     IP_Txt.Text = ipaddr[0];

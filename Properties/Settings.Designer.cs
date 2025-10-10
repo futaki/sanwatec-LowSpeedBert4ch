@@ -12,7 +12,7 @@ namespace BERT.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.13.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,18 +20,6 @@ namespace BERT.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string COMPortName {
-            get {
-                return ((string)(this["COMPortName"]));
-            }
-            set {
-                this["COMPortName"] = value;
             }
         }
         
@@ -68,6 +56,42 @@ namespace BERT.Properties {
             }
             set {
                 this["InterfaceSelect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM01")]
+        public string COMPortName1 {
+            get {
+                return ((string)(this["COMPortName1"]));
+            }
+            set {
+                this["COMPortName1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM02")]
+        public string COMPortName2 {
+            get {
+                return ((string)(this["COMPortName2"]));
+            }
+            set {
+                this["COMPortName2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ProgramPattern001")]
+        public string ProgramPatternFileName {
+            get {
+                return ((string)(this["ProgramPatternFileName"]));
+            }
+            set {
+                this["ProgramPatternFileName"] = value;
             }
         }
     }

@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BERT.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="COMPortName" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="RemoteIpAddress" Type="System.String" Scope="User">
       <Value Profile="(Default)">192.168.1.10</Value>
     </Setting>
@@ -13,6 +10,15 @@
     </Setting>
     <Setting Name="InterfaceSelect" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="COMPortName1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM01</Value>
+    </Setting>
+    <Setting Name="COMPortName2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM02</Value>
+    </Setting>
+    <Setting Name="ProgramPatternFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ProgramPattern001</Value>
     </Setting>
   </Settings>
 </SettingsFile>
