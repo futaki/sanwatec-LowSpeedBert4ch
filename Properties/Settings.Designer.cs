@@ -26,12 +26,12 @@ namespace BERT.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.10")]
-        public string RemoteIpAddress {
+        public string RemoteIpAddress1 {
             get {
-                return ((string)(this["RemoteIpAddress"]));
+                return ((string)(this["RemoteIpAddress1"]));
             }
             set {
-                this["RemoteIpAddress"] = value;
+                this["RemoteIpAddress1"] = value;
             }
         }
         
@@ -49,7 +49,7 @@ namespace BERT.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int InterfaceSelect {
             get {
                 return ((int)(this["InterfaceSelect"]));
@@ -92,6 +92,66 @@ namespace BERT.Properties {
             }
             set {
                 this["ProgramPatternFileName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ch1,0011,0012,0013,0014,0015,0016,0017,0018,16")]
+        public string ProgramPatternCH1 {
+            get {
+                return ((string)(this["ProgramPatternCH1"]));
+            }
+            set {
+                this["ProgramPatternCH1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ch2,0021,0022,0023,0024,0025,0026,0027,0028,16")]
+        public string ProgramPatternCH2 {
+            get {
+                return ((string)(this["ProgramPatternCH2"]));
+            }
+            set {
+                this["ProgramPatternCH2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ch3,0031,0032,0033,0034,0035,0036,0037,0038,16")]
+        public string ProgramPatternCH3 {
+            get {
+                return ((string)(this["ProgramPatternCH3"]));
+            }
+            set {
+                this["ProgramPatternCH3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ch4,0041,0042,0043,0044,0045,0046,0047,0048,16")]
+        public string ProgramPatternCH4 {
+            get {
+                return ((string)(this["ProgramPatternCH4"]));
+            }
+            set {
+                this["ProgramPatternCH4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.11")]
+        public string RemoteIpAddress2 {
+            get {
+                return ((string)(this["RemoteIpAddress2"]));
+            }
+            set {
+                this["RemoteIpAddress2"] = value;
             }
         }
     }

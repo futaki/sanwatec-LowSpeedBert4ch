@@ -229,9 +229,9 @@ namespace BERT
                 return "NG";
             }
         }
-        public static string SetEdPat(BertPortBase port, int ch, string pat)
+        public static string SetEdPat(BertPortBase port, int ch, string pat, string len)
         {
-            CommandReply reply = CommandManager.GetInstance().Execute(port, "edpat " + ch.ToString() + " " + pat);
+            CommandReply reply = CommandManager.GetInstance().Execute(port, "edpat " + ch.ToString() + " " + pat + " " + len);
             if (reply.Result == CommandCode.OK)
             {
                 // 戻り値なし
@@ -256,26 +256,26 @@ namespace BERT
             }
         }
 
-        public static string SetPrgPat(BertPortBase port, int lineno, string[] sptext)
+        public static string SetPrgPat(BertPortBase port, int ch, string[] sptext)
         {
 
-            int ch = 0;
+            int bch = 0;
 
-            if (lineno == 1)
+            if (ch == 1)
             {
-                ch = 1;
+                bch = 1;
             }
-            else if(lineno == 2)
+            else if(ch == 2)
             {
-                ch = 2;
+                bch = 2;
             }
-            else if (lineno == 3)
+            else if (ch == 3)
             {
-                ch = 1;
+                bch = 1;
             }
-            else if (lineno == 4)
+            else if (ch == 4)
             {
-                ch = 2;
+                bch = 2;
             }
             else 
             {
@@ -286,12 +286,12 @@ namespace BERT
             CommandReply reply;
             for (int i = 1; i < 9; i++)
             {
-                reply = CommandManager.GetInstance().Execute(port, "ppgprgpat " + ch.ToString() + " " + i.ToString() + " " + sptext[i] );
+                reply = CommandManager.GetInstance().Execute(port, "ppgprgpat " + bch.ToString() + " " + i.ToString() + " " + sptext[i] );
                 if (reply.Result != CommandCode.OK)
                 {
                     return reply.Data[0][1];
                 }
-                reply = CommandManager.GetInstance().Execute(port, "edprgpat " + ch.ToString() + " " + i.ToString() + " " + sptext[i]);
+                reply = CommandManager.GetInstance().Execute(port, "edprgpat " + bch.ToString() + " " + i.ToString() + " " + sptext[i]);
                 if (reply.Result != CommandCode.OK)
                 {
                     return reply.Data[0][1];

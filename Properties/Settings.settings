@@ -2,14 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BERT.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="RemoteIpAddress" Type="System.String" Scope="User">
+    <Setting Name="RemoteIpAddress1" Type="System.String" Scope="User">
       <Value Profile="(Default)">192.168.1.10</Value>
     </Setting>
     <Setting Name="RemoteDhcpEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InterfaceSelect" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="COMPortName1" Type="System.String" Scope="User">
       <Value Profile="(Default)">COM01</Value>
@@ -19,6 +19,21 @@
     </Setting>
     <Setting Name="ProgramPatternFileName" Type="System.String" Scope="User">
       <Value Profile="(Default)">ProgramPattern001</Value>
+    </Setting>
+    <Setting Name="ProgramPatternCH1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ch1,0011,0012,0013,0014,0015,0016,0017,0018,16</Value>
+    </Setting>
+    <Setting Name="ProgramPatternCH2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ch2,0021,0022,0023,0024,0025,0026,0027,0028,16</Value>
+    </Setting>
+    <Setting Name="ProgramPatternCH3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ch3,0031,0032,0033,0034,0035,0036,0037,0038,16</Value>
+    </Setting>
+    <Setting Name="ProgramPatternCH4" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ch4,0041,0042,0043,0044,0045,0046,0047,0048,16</Value>
+    </Setting>
+    <Setting Name="RemoteIpAddress2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.1.11</Value>
     </Setting>
   </Settings>
 </SettingsFile>
