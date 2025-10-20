@@ -1559,33 +1559,37 @@ namespace BERT
             LAB_Mesure_Time_Result_CH1.Text = rslt[6];
 
             dcnt1_Ch1 = double.Parse(rslt[4]);
+            LAB_Data_Cnt_Result_CH1.Text = dcnt1_Ch1.ToString("0.00E00");
 
-            if (dcnt1_Ch1 < dcnt2_Ch1)
-            {
-                dovercnt_Ch1 += 1;
-            }
-            dcnt3_Ch1 = dcnt1_Ch1 + dover_Ch1 * dovercnt_Ch1;
-            dcnt2_Ch1 = dcnt1_Ch1;
+            //if (dcnt1_Ch1 < dcnt2_Ch1)
+            //{
+            //    dovercnt_Ch1 += 1;
+            //}
+            //dcnt3_Ch1 = dcnt1_Ch1 + dover_Ch1 * dovercnt_Ch1;
+            //dcnt2_Ch1 = dcnt1_Ch1;
 
-            LAB_Data_Cnt_Result_CH1.Text = dcnt3_Ch1.ToString("0.00E00");
+            //LAB_Data_Cnt_Result_CH1.Text = dcnt3_Ch1.ToString("0.00E00");
 
             ecnt1_Ch1 = double.Parse(rslt[5]);
 
-            if (ecnt1_Ch1 < ecnt2_Ch1)
-            {
-                eovercnt_Ch1 += 1;
-            }
-            ecnt3_Ch1 = ecnt1_Ch1 + eover_Ch1 * eovercnt_Ch1;
-            ecnt2_Ch1 = ecnt1_Ch1;
+            //if (ecnt1_Ch1 < ecnt2_Ch1)
+            //{
+            //    eovercnt_Ch1 += 1;
+            //}
+            //ecnt3_Ch1 = ecnt1_Ch1 + eover_Ch1 * eovercnt_Ch1;
+            //ecnt2_Ch1 = ecnt1_Ch1;
 
-            LAB_Err_Cnt_Result_CH1.Text = ecnt3_Ch1.ToString("0.00E00");
-        
+            //LAB_Err_Cnt_Result_CH1.Text = ecnt3_Ch1.ToString("0.00E00");
+            LAB_Err_Cnt_Result_CH1.Text = ecnt1_Ch1.ToString("0.00E00");
+
             err = double.Parse(rslt[5]);
-            bit = dcnt3_Ch1;
+            //bit = dcnt3_Ch1;
+            bit = dcnt1_Ch1;
             es = (err / bit * 100);
             if (es == 0)
             {
-                wstr1 = dcnt3_Ch1.ToString("0.00E00");
+                //wstr1 = dcnt3_Ch1.ToString("0.00E00");
+                wstr1 = dcnt1_Ch1.ToString("0.00E00");
                 wstr1 = wstr1.Substring(5);
                 LAB_BER_Result_CH1.Text = "0.00E-" + wstr1;
             }
@@ -1644,33 +1648,37 @@ namespace BERT
             LAB_Mesure_Time_Result_CH2.Text = rslt[6];
 
             dcnt1_Ch2 = double.Parse(rslt[4]);
+            LAB_Data_Cnt_Result_CH2.Text = dcnt1_Ch2.ToString("0.00E00");
 
-            if (dcnt1_Ch2 < dcnt2_Ch2)
-            {
-                dovercnt_Ch2 += 1;
-            }
-            dcnt3_Ch2 = dcnt1_Ch2 + dover_Ch2 * dovercnt_Ch2;
-            dcnt2_Ch2 = dcnt1_Ch2;
+            //if (dcnt1_Ch2 < dcnt2_Ch2)
+            //{
+            //    dovercnt_Ch2 += 1;
+            //}
+            //dcnt3_Ch2 = dcnt1_Ch2 + dover_Ch2 * dovercnt_Ch2;
+            //dcnt2_Ch2 = dcnt1_Ch2;
 
-            LAB_Data_Cnt_Result_CH2.Text = dcnt3_Ch2.ToString("0.00E00");
+            //LAB_Data_Cnt_Result_CH2.Text = dcnt3_Ch2.ToString("0.00E00");
 
             ecnt1_Ch2 = double.Parse(rslt[5]);
+            LAB_Err_Cnt_Result_CH2.Text = ecnt1_Ch2.ToString("0.00E00");
 
-            if (ecnt1_Ch2 < ecnt2_Ch2)
-            {
-                eovercnt_Ch2 += 1;
-            }
-            ecnt3_Ch2 = ecnt1_Ch2 + eover_Ch2 * eovercnt_Ch2;
-            ecnt2_Ch2 = ecnt1_Ch2;
+            //if (ecnt1_Ch2 < ecnt2_Ch2)
+            //{
+            //    eovercnt_Ch2 += 1;
+            //}
+            //ecnt3_Ch2 = ecnt1_Ch2 + eover_Ch2 * eovercnt_Ch2;
+            //ecnt2_Ch2 = ecnt1_Ch2;
 
-            LAB_Err_Cnt_Result_CH2.Text = ecnt3_Ch2.ToString("0.00E00");
+            //LAB_Err_Cnt_Result_CH2.Text = ecnt3_Ch2.ToString("0.00E00");
 
             err = double.Parse(rslt[5]);
-            bit = dcnt3_Ch2;
+            //bit = dcnt3_Ch2;
+            bit = dcnt1_Ch2;
             es = (err / bit * 100);
             if (es == 0)
             {
-                wstr1 = dcnt3_Ch2.ToString("0.00E00");
+                //wstr1 = dcnt3_Ch2.ToString("0.00E00");
+                wstr1 = dcnt1_Ch2.ToString("0.00E00");
                 wstr1 = wstr1.Substring(5);
                 LAB_BER_Result_CH2.Text = "0.00E-" + wstr1;
             }
@@ -1730,33 +1738,37 @@ namespace BERT
             LAB_Mesure_Time_Result_CH3.Text = rslt[6];
 
             dcnt1_Ch3 = double.Parse(rslt[4]);
+            LAB_Data_Cnt_Result_CH3.Text = dcnt1_Ch3.ToString("0.00E00");
 
-            if (dcnt1_Ch3 < dcnt2_Ch3)
-            {
-                dovercnt_Ch3 += 1;
-            }
-            dcnt3_Ch3 = dcnt1_Ch3 + dover_Ch3 * dovercnt_Ch3;
-            dcnt2_Ch3 = dcnt1_Ch3;
+            //if (dcnt1_Ch3 < dcnt2_Ch3)
+            //{
+            //    dovercnt_Ch3 += 1;
+            //}
+            //dcnt3_Ch3 = dcnt1_Ch3 + dover_Ch3 * dovercnt_Ch3;
+            //dcnt2_Ch3 = dcnt1_Ch3;
 
-            LAB_Data_Cnt_Result_CH3.Text = dcnt3_Ch3.ToString("0.00E00");
+            //LAB_Data_Cnt_Result_CH3.Text = dcnt3_Ch3.ToString("0.00E00");
 
             ecnt1_Ch3 = double.Parse(rslt[5]);
+            LAB_Err_Cnt_Result_CH3.Text = ecnt1_Ch3.ToString("0.00E00");
 
-            if (ecnt1_Ch3 < ecnt2_Ch3)
-            {
-                eovercnt_Ch3 += 1;
-            }
-            ecnt3_Ch3 = ecnt1_Ch3 + eover_Ch3 * eovercnt_Ch3;
-            ecnt2_Ch3 = ecnt1_Ch3;
+            //if (ecnt1_Ch3 < ecnt2_Ch3)
+            //{
+            //    eovercnt_Ch3 += 1;
+            //}
+            //ecnt3_Ch3 = ecnt1_Ch3 + eover_Ch3 * eovercnt_Ch3;
+            //ecnt2_Ch3 = ecnt1_Ch3;
 
-            LAB_Err_Cnt_Result_CH3.Text = ecnt3_Ch3.ToString("0.00E00");
+            //LAB_Err_Cnt_Result_CH3.Text = ecnt3_Ch3.ToString("0.00E00");
 
             err = double.Parse(rslt[5]);
-            bit = dcnt3_Ch3;
+            //bit = dcnt3_Ch3;
+            bit = dcnt1_Ch3;
             es = (err / bit * 100);
             if (es == 0)
             {
-                wstr1 = dcnt3_Ch3.ToString("0.00E00");
+                //wstr1 = dcnt3_Ch3.ToString("0.00E00");
+                wstr1 = dcnt1_Ch3.ToString("0.00E00");
                 wstr1 = wstr1.Substring(5);
                 LAB_BER_Result_CH3.Text = "0.00E-" + wstr1;
             }
@@ -1816,33 +1828,37 @@ namespace BERT
             LAB_Mesure_Time_Result_CH4.Text = rslt[6];
 
             dcnt1_Ch4 = double.Parse(rslt[4]);
+            LAB_Data_Cnt_Result_CH4.Text = dcnt1_Ch4.ToString("0.00E00");
 
-            if (dcnt1_Ch4 < dcnt2_Ch4)
-            {
-                dovercnt_Ch4 += 1;
-            }
-            dcnt3_Ch4 = dcnt1_Ch4 + dover_Ch4 * dovercnt_Ch4;
-            dcnt2_Ch4 = dcnt1_Ch4;
+            //if (dcnt1_Ch4 < dcnt2_Ch4)
+            //{
+            //    dovercnt_Ch4 += 1;
+            //}
+            //dcnt3_Ch4 = dcnt1_Ch4 + dover_Ch4 * dovercnt_Ch4;
+            //dcnt2_Ch4 = dcnt1_Ch4;
 
-            LAB_Data_Cnt_Result_CH4.Text = dcnt3_Ch4.ToString("0.00E00");
+            //LAB_Data_Cnt_Result_CH4.Text = dcnt3_Ch4.ToString("0.00E00");
 
             ecnt1_Ch4 = double.Parse(rslt[5]);
+            LAB_Err_Cnt_Result_CH4.Text = ecnt1_Ch4.ToString("0.00E00");
 
-            if (ecnt1_Ch4 < ecnt2_Ch4)
-            {
-                eovercnt_Ch4 += 1;
-            }
-            ecnt3_Ch4 = ecnt1_Ch4 + eover_Ch4 * eovercnt_Ch4;
-            ecnt2_Ch4 = ecnt1_Ch4;
+            //if (ecnt1_Ch4 < ecnt2_Ch4)
+            //{
+            //    eovercnt_Ch4 += 1;
+            //}
+            //ecnt3_Ch4 = ecnt1_Ch4 + eover_Ch4 * eovercnt_Ch4;
+            //ecnt2_Ch4 = ecnt1_Ch4;
 
-            LAB_Err_Cnt_Result_CH4.Text = ecnt3_Ch4.ToString("0.00E00");
+            //LAB_Err_Cnt_Result_CH4.Text = ecnt3_Ch4.ToString("0.00E00");
 
             err = double.Parse(rslt[5]);
-            bit = dcnt3_Ch4;
+            bit = dcnt1_Ch4;
+            //bit = dcnt3_Ch4;
             es = (err / bit * 100);
             if (es == 0)
             {
-                wstr1 = dcnt3_Ch4.ToString("0.00E00");
+                wstr1 = dcnt1_Ch4.ToString("0.00E00");
+                //wstr1 = dcnt3_Ch4.ToString("0.00E00");
                 wstr1 = wstr1.Substring(5);
                 LAB_BER_Result_CH4.Text = "0.00E-" + wstr1;
             }
