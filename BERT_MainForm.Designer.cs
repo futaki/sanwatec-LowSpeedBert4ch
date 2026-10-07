@@ -1,4 +1,6 @@
-﻿namespace BERT
+﻿using System.Drawing;
+
+namespace BERT
 {
     partial class BERT_MainForm
     {
@@ -82,6 +84,7 @@
             this.終了ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.netwrokSetNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.programPatternSetPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ヘルプHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Ver = new System.Windows.Forms.ToolStripMenuItem();
             this.COM_Panel = new System.Windows.Forms.Panel();
@@ -217,7 +220,8 @@
             this.LAB_ALL_MEASURE = new System.Windows.Forms.Label();
             this.BTN_ALL_TX = new System.Windows.Forms.Button();
             this.LAB_ALL_TX_OUT = new System.Windows.Forms.Label();
-            this.programPatternSetPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LAB_COM1_NAME = new System.Windows.Forms.Label();
+            this.LAB_COM2_NAME = new System.Windows.Forms.Label();
             LAB_TXout_CH1 = new System.Windows.Forms.Label();
             LAB_PN_CH1 = new System.Windows.Forms.Label();
             LAB_LENGTH_CH1 = new System.Windows.Forms.Label();
@@ -410,7 +414,7 @@
             // 
             LAB_Mesure_CH1.AutoSize = true;
             LAB_Mesure_CH1.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            LAB_Mesure_CH1.Location = new System.Drawing.Point(11, 71);
+            LAB_Mesure_CH1.Location = new System.Drawing.Point(11, 70);
             LAB_Mesure_CH1.Name = "LAB_Mesure_CH1";
             LAB_Mesure_CH1.Size = new System.Drawing.Size(92, 20);
             LAB_Mesure_CH1.TabIndex = 23;
@@ -520,7 +524,7 @@
             // 
             LAB_Mesure_CH3.AutoSize = true;
             LAB_Mesure_CH3.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            LAB_Mesure_CH3.Location = new System.Drawing.Point(11, 71);
+            LAB_Mesure_CH3.Location = new System.Drawing.Point(11, 70);
             LAB_Mesure_CH3.Name = "LAB_Mesure_CH3";
             LAB_Mesure_CH3.Size = new System.Drawing.Size(92, 20);
             LAB_Mesure_CH3.TabIndex = 23;
@@ -630,7 +634,7 @@
             // 
             LAB_Mesure_CH4.AutoSize = true;
             LAB_Mesure_CH4.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            LAB_Mesure_CH4.Location = new System.Drawing.Point(11, 71);
+            LAB_Mesure_CH4.Location = new System.Drawing.Point(11, 70);
             LAB_Mesure_CH4.Name = "LAB_Mesure_CH4";
             LAB_Mesure_CH4.Size = new System.Drawing.Size(92, 20);
             LAB_Mesure_CH4.TabIndex = 23;
@@ -815,6 +819,13 @@
             this.netwrokSetNToolStripMenuItem.Text = "Netwrok Set(N)";
             this.netwrokSetNToolStripMenuItem.Click += new System.EventHandler(this.netwrokSetNToolStripMenuItem_Click);
             // 
+            // programPatternSetPToolStripMenuItem
+            // 
+            this.programPatternSetPToolStripMenuItem.Name = "programPatternSetPToolStripMenuItem";
+            this.programPatternSetPToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.programPatternSetPToolStripMenuItem.Text = "Program Pattern Set(P)";
+            this.programPatternSetPToolStripMenuItem.Click += new System.EventHandler(this.programPatternSetPToolStripMenuItem_Click_1);
+            // 
             // ヘルプHToolStripMenuItem
             // 
             this.ヘルプHToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -833,6 +844,8 @@
             // COM_Panel
             // 
             this.COM_Panel.Controls.Add(this.Ether_Panel);
+            this.COM_Panel.Controls.Add(this.LAB_COM2_NAME);
+            this.COM_Panel.Controls.Add(this.LAB_COM1_NAME);
             this.COM_Panel.Controls.Add(this.CBOX_COM2);
             this.COM_Panel.Controls.Add(this.LAB_COM2);
             this.COM_Panel.Controls.Add(this.PBOX_COM_SYS_ERR);
@@ -856,7 +869,7 @@
             this.Ether_Panel.Controls.Add(this.BTN_ETHER_Connect);
             this.Ether_Panel.Controls.Add(this.TXT_IPAdr1);
             this.Ether_Panel.Controls.Add(this.LAB_Ether1);
-            this.Ether_Panel.Location = new System.Drawing.Point(0, 0);
+            this.Ether_Panel.Location = new System.Drawing.Point(1, 0);
             this.Ether_Panel.Name = "Ether_Panel";
             this.Ether_Panel.Size = new System.Drawing.Size(1164, 63);
             this.Ether_Panel.TabIndex = 2;
@@ -952,7 +965,7 @@
             this.CBOX_COM2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBOX_COM2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CBOX_COM2.FormattingEnabled = true;
-            this.CBOX_COM2.Location = new System.Drawing.Point(518, 24);
+            this.CBOX_COM2.Location = new System.Drawing.Point(520, 24);
             this.CBOX_COM2.Name = "CBOX_COM2";
             this.CBOX_COM2.Size = new System.Drawing.Size(121, 24);
             this.CBOX_COM2.TabIndex = 8;
@@ -963,9 +976,9 @@
             this.LAB_COM2.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.LAB_COM2.Location = new System.Drawing.Point(343, 26);
             this.LAB_COM2.Name = "LAB_COM2";
-            this.LAB_COM2.Size = new System.Drawing.Size(169, 20);
+            this.LAB_COM2.Size = new System.Drawing.Size(185, 20);
             this.LAB_COM2.TabIndex = 7;
-            this.LAB_COM2.Text = "COM PORT(CH3-4)";
+            this.LAB_COM2.Text = "COM PORT(CH3-4) : ";
             // 
             // PBOX_COM_SYS_ERR
             // 
@@ -996,9 +1009,9 @@
             this.LAB_COM1.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.LAB_COM1.Location = new System.Drawing.Point(18, 26);
             this.LAB_COM1.Name = "LAB_COM1";
-            this.LAB_COM1.Size = new System.Drawing.Size(169, 20);
+            this.LAB_COM1.Size = new System.Drawing.Size(185, 20);
             this.LAB_COM1.TabIndex = 0;
-            this.LAB_COM1.Text = "COM PORT(CH1-2)";
+            this.LAB_COM1.Text = "COM PORT(CH1-2) : ";
             // 
             // BTN_COM_Connect
             // 
@@ -1087,6 +1100,7 @@
             // 
             // CBOX_ReSync_Mode_CH1
             // 
+            this.CBOX_ReSync_Mode_CH1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CBOX_ReSync_Mode_CH1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBOX_ReSync_Mode_CH1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CBOX_ReSync_Mode_CH1.FormattingEnabled = true;
@@ -1097,6 +1111,7 @@
             this.CBOX_ReSync_Mode_CH1.Name = "CBOX_ReSync_Mode_CH1";
             this.CBOX_ReSync_Mode_CH1.Size = new System.Drawing.Size(102, 24);
             this.CBOX_ReSync_Mode_CH1.TabIndex = 24;
+            this.CBOX_ReSync_Mode_CH1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CBOX_ReSync_Mode_CH1_DrawItem);
             this.CBOX_ReSync_Mode_CH1.SelectedIndexChanged += new System.EventHandler(this.CBOX_ReSync_Mode_CH1_SelectedIndexChanged);
             // 
             // LAB_ReSync_Mode_CH1
@@ -1118,7 +1133,7 @@
             this.BTN_MES_CH1.Name = "BTN_MES_CH1";
             this.BTN_MES_CH1.Size = new System.Drawing.Size(101, 36);
             this.BTN_MES_CH1.TabIndex = 23;
-            this.BTN_MES_CH1.Text = "START";
+            this.BTN_MES_CH1.Text = "OFF";
             this.BTN_MES_CH1.UseVisualStyleBackColor = false;
             this.BTN_MES_CH1.Click += new System.EventHandler(this.BTN_MES_CH1_Click);
             // 
@@ -1289,6 +1304,7 @@
             // 
             // CMB_PN_CH1
             // 
+            this.CMB_PN_CH1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CMB_PN_CH1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CMB_PN_CH1.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CMB_PN_CH1.FormattingEnabled = true;
@@ -1302,6 +1318,7 @@
             this.CMB_PN_CH1.Name = "CMB_PN_CH1";
             this.CMB_PN_CH1.Size = new System.Drawing.Size(102, 23);
             this.CMB_PN_CH1.TabIndex = 25;
+            this.CMB_PN_CH1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CMB_PN_CH1_DrawItem);
             this.CMB_PN_CH1.SelectedIndexChanged += new System.EventHandler(this.CMB_PN_CH1_SelectedIndexChanged);
             // 
             // BTN_Sync_CH1
@@ -1318,7 +1335,7 @@
             // 
             // BTN_TX_OUT_CH1
             // 
-            this.BTN_TX_OUT_CH1.BackColor = System.Drawing.Color.Red;
+            this.BTN_TX_OUT_CH1.BackColor = System.Drawing.SystemColors.Control;
             this.BTN_TX_OUT_CH1.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BTN_TX_OUT_CH1.Location = new System.Drawing.Point(227, 22);
             this.BTN_TX_OUT_CH1.Name = "BTN_TX_OUT_CH1";
@@ -1341,6 +1358,7 @@
             // 
             // CBOX_BR
             // 
+            this.CBOX_BR.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CBOX_BR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBOX_BR.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CBOX_BR.FormattingEnabled = true;
@@ -1350,7 +1368,6 @@
             "150",
             "100",
             "50",
-            "35.02",
             "20",
             "10",
             "5",
@@ -1359,6 +1376,7 @@
             this.CBOX_BR.Name = "CBOX_BR";
             this.CBOX_BR.Size = new System.Drawing.Size(76, 24);
             this.CBOX_BR.TabIndex = 6;
+            this.CBOX_BR.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CBOX_BR_DrawItem);
             this.CBOX_BR.SelectedIndexChanged += new System.EventHandler(this.CBOX_BR_SelectedIndexChanged);
             // 
             // LAB_Mbps
@@ -1408,6 +1426,7 @@
             // 
             // CBOX_ReSync_Mode_CH2
             // 
+            this.CBOX_ReSync_Mode_CH2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CBOX_ReSync_Mode_CH2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBOX_ReSync_Mode_CH2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CBOX_ReSync_Mode_CH2.FormattingEnabled = true;
@@ -1418,6 +1437,7 @@
             this.CBOX_ReSync_Mode_CH2.Name = "CBOX_ReSync_Mode_CH2";
             this.CBOX_ReSync_Mode_CH2.Size = new System.Drawing.Size(102, 24);
             this.CBOX_ReSync_Mode_CH2.TabIndex = 25;
+            this.CBOX_ReSync_Mode_CH2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CBOX_ReSync_Mode_CH2_DrawItem);
             this.CBOX_ReSync_Mode_CH2.SelectedIndexChanged += new System.EventHandler(this.CBOX_ReSync_Mode_CH2_SelectedIndexChanged);
             // 
             // LAB_ReSync_Mode_CH2
@@ -1462,7 +1482,7 @@
             this.BTN_MES_CH2.Name = "BTN_MES_CH2";
             this.BTN_MES_CH2.Size = new System.Drawing.Size(101, 36);
             this.BTN_MES_CH2.TabIndex = 26;
-            this.BTN_MES_CH2.Text = "START";
+            this.BTN_MES_CH2.Text = "OFF";
             this.BTN_MES_CH2.UseVisualStyleBackColor = false;
             this.BTN_MES_CH2.Click += new System.EventHandler(this.BTN_MES_CH2_Click);
             // 
@@ -1470,7 +1490,7 @@
             // 
             this.LAB_Mesure_CH2.AutoSize = true;
             this.LAB_Mesure_CH2.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.LAB_Mesure_CH2.Location = new System.Drawing.Point(6, 71);
+            this.LAB_Mesure_CH2.Location = new System.Drawing.Point(6, 70);
             this.LAB_Mesure_CH2.Name = "LAB_Mesure_CH2";
             this.LAB_Mesure_CH2.Size = new System.Drawing.Size(92, 20);
             this.LAB_Mesure_CH2.TabIndex = 26;
@@ -1655,6 +1675,7 @@
             // 
             // CMB_PN_CH2
             // 
+            this.CMB_PN_CH2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CMB_PN_CH2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CMB_PN_CH2.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CMB_PN_CH2.FormattingEnabled = true;
@@ -1668,11 +1689,12 @@
             this.CMB_PN_CH2.Name = "CMB_PN_CH2";
             this.CMB_PN_CH2.Size = new System.Drawing.Size(102, 23);
             this.CMB_PN_CH2.TabIndex = 21;
+            this.CMB_PN_CH2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CMB_PN_CH2_DrawItem);
             this.CMB_PN_CH2.SelectedIndexChanged += new System.EventHandler(this.CMB_PN_CH2_SelectedIndexChanged);
             // 
             // BTN_TX_OUT_CH2
             // 
-            this.BTN_TX_OUT_CH2.BackColor = System.Drawing.Color.Red;
+            this.BTN_TX_OUT_CH2.BackColor = System.Drawing.SystemColors.Control;
             this.BTN_TX_OUT_CH2.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BTN_TX_OUT_CH2.Location = new System.Drawing.Point(222, 22);
             this.BTN_TX_OUT_CH2.Name = "BTN_TX_OUT_CH2";
@@ -1695,6 +1717,7 @@
             // 
             // CMB_Trg
             // 
+            this.CMB_Trg.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CMB_Trg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CMB_Trg.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CMB_Trg.FormattingEnabled = true;
@@ -1705,6 +1728,7 @@
             this.CMB_Trg.Name = "CMB_Trg";
             this.CMB_Trg.Size = new System.Drawing.Size(100, 24);
             this.CMB_Trg.TabIndex = 22;
+            this.CMB_Trg.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CMB_Trg_DrawItem);
             this.CMB_Trg.SelectedIndexChanged += new System.EventHandler(this.CMB_Trg_SelectedIndexChanged);
             // 
             // LAB_Clock
@@ -1799,6 +1823,7 @@
             // 
             // CBOX_ReSync_Mode_CH4
             // 
+            this.CBOX_ReSync_Mode_CH4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CBOX_ReSync_Mode_CH4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBOX_ReSync_Mode_CH4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CBOX_ReSync_Mode_CH4.FormattingEnabled = true;
@@ -1809,6 +1834,7 @@
             this.CBOX_ReSync_Mode_CH4.Name = "CBOX_ReSync_Mode_CH4";
             this.CBOX_ReSync_Mode_CH4.Size = new System.Drawing.Size(102, 24);
             this.CBOX_ReSync_Mode_CH4.TabIndex = 24;
+            this.CBOX_ReSync_Mode_CH4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CBOX_ReSync_Mode_CH4_DrawItem);
             this.CBOX_ReSync_Mode_CH4.SelectedIndexChanged += new System.EventHandler(this.CBOX_ReSync_Mode_CH4_SelectedIndexChanged);
             // 
             // LAB_ReSync_Mode_CH4
@@ -1830,7 +1856,7 @@
             this.BTN_MES_CH4.Name = "BTN_MES_CH4";
             this.BTN_MES_CH4.Size = new System.Drawing.Size(101, 36);
             this.BTN_MES_CH4.TabIndex = 23;
-            this.BTN_MES_CH4.Text = "START";
+            this.BTN_MES_CH4.Text = "OFF";
             this.BTN_MES_CH4.UseVisualStyleBackColor = false;
             this.BTN_MES_CH4.Click += new System.EventHandler(this.BTN_MES_CH4_Click);
             // 
@@ -2002,6 +2028,7 @@
             // 
             // CMB_PN_CH4
             // 
+            this.CMB_PN_CH4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CMB_PN_CH4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CMB_PN_CH4.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CMB_PN_CH4.FormattingEnabled = true;
@@ -2015,6 +2042,7 @@
             this.CMB_PN_CH4.Name = "CMB_PN_CH4";
             this.CMB_PN_CH4.Size = new System.Drawing.Size(102, 23);
             this.CMB_PN_CH4.TabIndex = 25;
+            this.CMB_PN_CH4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CMB_PN_CH4_DrawItem);
             this.CMB_PN_CH4.SelectedIndexChanged += new System.EventHandler(this.CMB_PN_CH4_SelectedIndexChanged);
             // 
             // BTN_Sync_CH4
@@ -2031,7 +2059,7 @@
             // 
             // BTN_TX_OUT_CH4
             // 
-            this.BTN_TX_OUT_CH4.BackColor = System.Drawing.Color.Red;
+            this.BTN_TX_OUT_CH4.BackColor = System.Drawing.SystemColors.Control;
             this.BTN_TX_OUT_CH4.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BTN_TX_OUT_CH4.Location = new System.Drawing.Point(227, 22);
             this.BTN_TX_OUT_CH4.Name = "BTN_TX_OUT_CH4";
@@ -2088,6 +2116,7 @@
             // 
             // CBOX_ReSync_Mode_CH3
             // 
+            this.CBOX_ReSync_Mode_CH3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CBOX_ReSync_Mode_CH3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBOX_ReSync_Mode_CH3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CBOX_ReSync_Mode_CH3.FormattingEnabled = true;
@@ -2098,6 +2127,7 @@
             this.CBOX_ReSync_Mode_CH3.Name = "CBOX_ReSync_Mode_CH3";
             this.CBOX_ReSync_Mode_CH3.Size = new System.Drawing.Size(102, 24);
             this.CBOX_ReSync_Mode_CH3.TabIndex = 24;
+            this.CBOX_ReSync_Mode_CH3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CBOX_ReSync_Mode_CH3_DrawItem);
             this.CBOX_ReSync_Mode_CH3.SelectedIndexChanged += new System.EventHandler(this.CBOX_ReSync_Mode_CH3_SelectedIndexChanged);
             // 
             // LAB_ReSync_Mode_CH3
@@ -2119,7 +2149,7 @@
             this.BTN_MES_CH3.Name = "BTN_MES_CH3";
             this.BTN_MES_CH3.Size = new System.Drawing.Size(101, 36);
             this.BTN_MES_CH3.TabIndex = 23;
-            this.BTN_MES_CH3.Text = "START";
+            this.BTN_MES_CH3.Text = "OFF";
             this.BTN_MES_CH3.UseVisualStyleBackColor = false;
             this.BTN_MES_CH3.Click += new System.EventHandler(this.BTN_MES_CH3_Click);
             // 
@@ -2291,6 +2321,7 @@
             // 
             // CMB_PN_CH3
             // 
+            this.CMB_PN_CH3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CMB_PN_CH3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CMB_PN_CH3.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CMB_PN_CH3.FormattingEnabled = true;
@@ -2304,6 +2335,7 @@
             this.CMB_PN_CH3.Name = "CMB_PN_CH3";
             this.CMB_PN_CH3.Size = new System.Drawing.Size(102, 23);
             this.CMB_PN_CH3.TabIndex = 25;
+            this.CMB_PN_CH3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CMB_PN_CH3_DrawItem);
             this.CMB_PN_CH3.SelectedIndexChanged += new System.EventHandler(this.CMB_PN_CH3_SelectedIndexChanged);
             // 
             // BTN_Sync_CH3
@@ -2320,7 +2352,7 @@
             // 
             // BTN_TX_OUT_CH3
             // 
-            this.BTN_TX_OUT_CH3.BackColor = System.Drawing.Color.Red;
+            this.BTN_TX_OUT_CH3.BackColor = System.Drawing.SystemColors.Control;
             this.BTN_TX_OUT_CH3.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BTN_TX_OUT_CH3.Location = new System.Drawing.Point(227, 22);
             this.BTN_TX_OUT_CH3.Name = "BTN_TX_OUT_CH3";
@@ -2428,7 +2460,7 @@
             this.BTN_ALL_MEASURE.Name = "BTN_ALL_MEASURE";
             this.BTN_ALL_MEASURE.Size = new System.Drawing.Size(88, 29);
             this.BTN_ALL_MEASURE.TabIndex = 3;
-            this.BTN_ALL_MEASURE.Text = "START";
+            this.BTN_ALL_MEASURE.Text = "ON";
             this.BTN_ALL_MEASURE.UseVisualStyleBackColor = true;
             this.BTN_ALL_MEASURE.Click += new System.EventHandler(this.BTN_ALL_MEASURE_Click);
             // 
@@ -2462,12 +2494,23 @@
             this.LAB_ALL_TX_OUT.TabIndex = 0;
             this.LAB_ALL_TX_OUT.Text = "TX OUTPUT";
             // 
-            // programPatternSetPToolStripMenuItem
+            // LAB_COM1_NAME
             // 
-            this.programPatternSetPToolStripMenuItem.Name = "programPatternSetPToolStripMenuItem";
-            this.programPatternSetPToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.programPatternSetPToolStripMenuItem.Text = "Program Pattern Set(P)";
-            this.programPatternSetPToolStripMenuItem.Click += new System.EventHandler(this.programPatternSetPToolStripMenuItem_Click_1);
+            this.LAB_COM1_NAME.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.LAB_COM1_NAME.Location = new System.Drawing.Point(195, 21);
+            this.LAB_COM1_NAME.Name = "LAB_COM1_NAME";
+            this.LAB_COM1_NAME.Size = new System.Drawing.Size(145, 32);
+            this.LAB_COM1_NAME.TabIndex = 9;
+            this.LAB_COM1_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LAB_COM2_NAME
+            // 
+            this.LAB_COM2_NAME.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.LAB_COM2_NAME.Location = new System.Drawing.Point(520, 22);
+            this.LAB_COM2_NAME.Name = "LAB_COM2_NAME";
+            this.LAB_COM2_NAME.Size = new System.Drawing.Size(145, 32);
+            this.LAB_COM2_NAME.TabIndex = 10;
+            this.LAB_COM2_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BERT_MainForm
             // 
@@ -2693,6 +2736,8 @@
         private System.Windows.Forms.Button BTN_ALL_COUNTER_RESET;
         private System.Windows.Forms.Label LAB_ALL_COUNTER;
         private System.Windows.Forms.ToolStripMenuItem programPatternSetPToolStripMenuItem;
+        private System.Windows.Forms.Label LAB_COM1_NAME;
+        private System.Windows.Forms.Label LAB_COM2_NAME;
     }
 }
 

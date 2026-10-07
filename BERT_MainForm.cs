@@ -278,7 +278,7 @@ namespace BERT
                 {
                     case "0":
                         BTN_TX_OUT_CH1.Text = "OFF";
-                        BTN_TX_OUT_CH1.BackColor = Color.Red;
+                        BTN_TX_OUT_CH1.BackColor = SystemColors.Control;
                         PBOX_Tx_STS_1.Image = BERT.Properties.Resources.led_red;
                         break;
                     case "1":
@@ -296,7 +296,7 @@ namespace BERT
                 {
                     case "0":
                         BTN_TX_OUT_CH2.Text = "OFF";
-                        BTN_TX_OUT_CH2.BackColor = Color.Red;
+                        BTN_TX_OUT_CH2.BackColor = SystemColors.Control;
                         PBOX_Tx_STS_2.Image = BERT.Properties.Resources.led_red;
                         break;
                     case "1":
@@ -314,7 +314,7 @@ namespace BERT
                 {
                     case "0":
                         BTN_TX_OUT_CH3.Text = "OFF";
-                        BTN_TX_OUT_CH3.BackColor = Color.Red;
+                        BTN_TX_OUT_CH3.BackColor = SystemColors.Control;
                         PBOX_Tx_STS_3.Image = BERT.Properties.Resources.led_red;
                         break;
                     case "1":
@@ -332,7 +332,7 @@ namespace BERT
                 {
                     case "0":
                         BTN_TX_OUT_CH4.Text = "OFF";
-                        BTN_TX_OUT_CH4.BackColor = Color.Red;
+                        BTN_TX_OUT_CH4.BackColor = SystemColors.Control;
                         PBOX_Tx_STS_4.Image = BERT.Properties.Resources.led_red;
                         break;
                     case "1":
@@ -353,11 +353,14 @@ namespace BERT
                 switch (rslt)
                 {
                     case "0":
-                        BTN_MES_CH1.Text = "START";
+                        BTN_MES_CH1.Text = "OFF";
+                        BTN_MES_CH1.BackColor = SystemColors.Control;
+
                         MesCh1Flag = false;
                         break;
                     case "1":
-                        BTN_MES_CH1.Text = "STOP";
+                        BTN_MES_CH1.Text = "ON";
+                        BTN_MES_CH1.BackColor = Color.Lime;
                         MesCh1Flag = true; 
                         break;
                     default:
@@ -369,11 +372,13 @@ namespace BERT
                 switch (rslt)
                 {
                     case "0":
-                        BTN_MES_CH2.Text = "START";
+                        BTN_MES_CH2.Text = "OFF";
+                        BTN_MES_CH2.BackColor = SystemColors.Control;
                         MesCh2Flag = false;
                         break;
                     case "1":
-                        BTN_MES_CH2.Text = "STOP";
+                        BTN_MES_CH2.Text = "ON";
+                        BTN_MES_CH2.BackColor = Color.Lime;
                         MesCh2Flag = true;
                         break;
                     default:
@@ -385,11 +390,13 @@ namespace BERT
                 switch (rslt)
                 {
                     case "0":
-                        BTN_MES_CH3.Text = "START";
+                        BTN_MES_CH3.Text = "OFF";
+                        BTN_MES_CH3.BackColor = SystemColors.Control;
                         MesCh3Flag = false;
                         break;
                     case "1":
-                        BTN_MES_CH3.Text = "STOP";
+                        BTN_MES_CH3.Text = "ON";
+                        BTN_MES_CH3.BackColor = Color.Lime;
                         MesCh3Flag = true;
                         break;
                     default:
@@ -401,11 +408,13 @@ namespace BERT
                 switch (rslt)
                 {
                     case "0":
-                        BTN_MES_CH4.Text = "START";
+                        BTN_MES_CH4.Text = "OFF";
+                        BTN_MES_CH4.BackColor = SystemColors.Control;
                         MesCh4Flag = false;
                         break;
                     case "1":
-                        BTN_MES_CH4.Text = "STOP";
+                        BTN_MES_CH4.Text = "ON";
+                        BTN_MES_CH4.BackColor = Color.Lime;
                         MesCh4Flag = true;
                         break;
                     default:
@@ -618,6 +627,11 @@ namespace BERT
                 bool connecting = this.BTN_COM_Connect.Text == "CONNECT";
                 if (connecting)
                 {
+                    if (preBertPort1.IsOpen) 
+                    {
+                        preBertPort1.Close();
+                    }
+                    CBOX_COM1.SelectedIndex = 0;
                     this.preBertPort1.BertPortNameSet(this.CBOX_COM1.Text);
                 }
 
@@ -625,6 +639,11 @@ namespace BERT
                 connecting = this.BTN_COM_Connect.Text == "CONNECT";
                 if (connecting)
                 {
+                    if (preBertPort2.IsOpen)
+                    {
+                        preBertPort2.Close();
+                    }
+                    CBOX_COM2.SelectedIndex = 0;
                     this.preBertPort2.BertPortNameSet(this.CBOX_COM2.Text);
                 }
 
@@ -680,7 +699,7 @@ namespace BERT
 
         private void バージョン情報VToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VersionForm versionInfo = new VersionForm(bertPort1, GUIVerInf);
+            VersionForm versionInfo = new VersionForm(bertPort1, bertPort2, GUIVerInf);
 
             versionInfo.ShowDialog();
 
@@ -788,7 +807,7 @@ namespace BERT
                     rslt = Commands.SetPPG(bertPort1, 1, 0);
                     if (rslt == "OK") {
                         BTN_TX_OUT_CH1.Text = "OFF";
-                        BTN_TX_OUT_CH1.BackColor = Color.Red;
+                        BTN_TX_OUT_CH1.BackColor = SystemColors.Control;
                         TxCh1Flag = false;
                         PBOX_Tx_STS_1.Image = BERT.Properties.Resources.led_red;
                         return;
@@ -796,9 +815,17 @@ namespace BERT
                 }
                 else
                 {
+                    string ptn = "";
+                    string len = "";
+
                     SetProgramPatternCH(1);
 
+                    len = LAB_LENGTH_CH1_Val.Text;
+                    ptn = GetProgramPatternLength(1);
+                    rslt = Commands.SetPpgPat(bertPort1, 1, ptn.ToLower(), len.ToLower());
+                    rslt = Commands.SetEdPat(bertPort1, 1, ptn.ToLower(), len.ToLower());
                     rslt = Commands.SetPPG(bertPort1, 1, 1);
+                    
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH1.Text = "ON";
@@ -830,7 +857,7 @@ namespace BERT
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH2.Text = "OFF";
-                        BTN_TX_OUT_CH2.BackColor = Color.Red;
+                        BTN_TX_OUT_CH2.BackColor = SystemColors.Control;
                         TxCh2Flag = false;
                         PBOX_Tx_STS_2.Image = BERT.Properties.Resources.led_red;
                         return;
@@ -838,9 +865,17 @@ namespace BERT
                 }
                 else
                 {
+                    string ptn = "";
+                    string len = "";
+
                     SetProgramPatternCH(2);
 
+                    len = LAB_LENGTH_CH1_Val.Text;
+                    ptn = GetProgramPatternLength(2);
+                    rslt = Commands.SetPpgPat(bertPort1, 2, ptn.ToLower(), len.ToLower());
+                    rslt = Commands.SetEdPat(bertPort1, 2, ptn.ToLower(), len.ToLower());
                     rslt = Commands.SetPPG(bertPort1, 2, 1);
+
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH2.Text = "ON";
@@ -872,7 +907,7 @@ namespace BERT
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH3.Text = "OFF";
-                        BTN_TX_OUT_CH3.BackColor = Color.Red;
+                        BTN_TX_OUT_CH3.BackColor = SystemColors.Control;
                         TxCh3Flag = false;
                         PBOX_Tx_STS_3.Image = BERT.Properties.Resources.led_red;
                         return;
@@ -880,9 +915,17 @@ namespace BERT
                 }
                 else
                 {
+                    string ptn = "";
+                    string len = "";
+
                     SetProgramPatternCH(3);
 
+                    len = LAB_LENGTH_CH1_Val.Text;
+                    ptn = GetProgramPatternLength(3);
+                    rslt = Commands.SetPpgPat(bertPort2, 1, ptn.ToLower(), len.ToLower());
+                    rslt = Commands.SetEdPat(bertPort2, 1, ptn.ToLower(), len.ToLower());
                     rslt = Commands.SetPPG(bertPort2, 1, 1);
+
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH3.Text = "ON";
@@ -914,7 +957,7 @@ namespace BERT
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH4.Text = "OFF";
-                        BTN_TX_OUT_CH4.BackColor = Color.Red;
+                        BTN_TX_OUT_CH4.BackColor = SystemColors.Control;
                         TxCh4Flag = false;
                         PBOX_Tx_STS_4.Image = BERT.Properties.Resources.led_red;
                         return;
@@ -922,9 +965,17 @@ namespace BERT
                 }
                 else
                 {
+                    string ptn = "";
+                    string len = "";
+
                     SetProgramPatternCH(4);
 
+                    len = LAB_LENGTH_CH1_Val.Text;
+                    ptn = GetProgramPatternLength(4);
+                    rslt = Commands.SetPpgPat(bertPort2, 2, ptn.ToLower(), len.ToLower());
+                    rslt = Commands.SetEdPat(bertPort2, 2, ptn.ToLower(), len.ToLower());
                     rslt = Commands.SetPPG(bertPort2, 2, 1);
+
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH4.Text = "ON";
@@ -956,7 +1007,8 @@ namespace BERT
                     ret = Commands.SetEd(bertPort1, 1, 0);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH1.Text = "START";
+                        BTN_MES_CH1.Text = "OFF";
+                        BTN_MES_CH1.BackColor = SystemColors.Control;
                         MesCh1Flag = false;
                     }
                     if (!MesCh1Flag && !MesCh2Flag && !MesCh3Flag && !MesCh4Flag)
@@ -969,7 +1021,8 @@ namespace BERT
                     ret = Commands.SetEd(bertPort1, 1, 1);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH1.Text = "STOP";
+                        BTN_MES_CH1.Text = "ON";
+                        BTN_MES_CH1.BackColor = Color.Lime;
                         MesCh1Flag = true;
                     }
                     programPatternSetPToolStripMenuItem.Enabled = false;
@@ -996,7 +1049,8 @@ namespace BERT
                     ret = Commands.SetEd(bertPort1, 2, 0);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH2.Text = "START";
+                        BTN_MES_CH2.Text = "OFF";
+                        BTN_MES_CH2.BackColor = SystemColors.Control;
                         MesCh2Flag = false;
                     }
                     if (!MesCh1Flag && !MesCh2Flag && !MesCh3Flag && !MesCh4Flag)
@@ -1009,7 +1063,8 @@ namespace BERT
                     ret = Commands.SetEd(bertPort1, 2, 1);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH2.Text = "STOP";
+                        BTN_MES_CH2.Text = "ON";
+                        BTN_MES_CH2.BackColor = Color.Lime;
                         MesCh2Flag = true;
                     }
                     programPatternSetPToolStripMenuItem.Enabled = false;
@@ -1037,7 +1092,8 @@ namespace BERT
                     ret = Commands.SetEd(bertPort2, 1, 0);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH3.Text = "START";
+                        BTN_MES_CH3.Text = "OFF";
+                        BTN_MES_CH3.BackColor = SystemColors.Control;
                         MesCh3Flag = false;
                     }
                     if (!MesCh1Flag && !MesCh2Flag && !MesCh3Flag && !MesCh4Flag)
@@ -1050,8 +1106,9 @@ namespace BERT
                     ret = Commands.SetEd(bertPort2, 1, 1);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH3.Text = "STOP";
-                        MesCh3Flag = true;
+                        BTN_MES_CH3.Text = "ON";
+                        BTN_MES_CH3.BackColor = Color.Lime;
+                       MesCh3Flag = true;
                     }
                     programPatternSetPToolStripMenuItem.Enabled = false;
                 }
@@ -1078,7 +1135,8 @@ namespace BERT
                     ret = Commands.SetEd(bertPort2, 2, 0);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH4.Text = "START";
+                        BTN_MES_CH4.Text = "OFF";
+                        BTN_MES_CH4.BackColor = SystemColors.Control;
                         MesCh4Flag = false;
                     }
                     if (!MesCh1Flag && !MesCh2Flag && !MesCh3Flag && !MesCh4Flag)
@@ -1091,7 +1149,8 @@ namespace BERT
                     ret = Commands.SetEd(bertPort2, 2, 1);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH4.Text = "STOP";
+                        BTN_MES_CH4.Text = "ON";
+                        BTN_MES_CH4.BackColor = Color.Lime;
                         MesCh4Flag = true;
                     }
                     programPatternSetPToolStripMenuItem.Enabled = false;
@@ -1585,7 +1644,7 @@ namespace BERT
             err = double.Parse(rslt[5]);
             //bit = dcnt3_Ch1;
             bit = dcnt1_Ch1;
-            es = (err / bit * 100);
+            es = err / bit;
             if (es == 0)
             {
                 //wstr1 = dcnt3_Ch1.ToString("0.00E00");
@@ -1627,6 +1686,14 @@ namespace BERT
             {
                 PBOX_ERR_FLG_CH1.Image = PBOX_ERR_FLG_CH1.ErrorImage;
             }
+
+            if(CMB_PN_CH1.SelectedIndex == 4) 
+            {
+                var str = Properties.Settings.Default.ProgramPatternCH1;
+                string[] len = str.Split(',');
+                LAB_LENGTH_CH1_Val.Text = len[9];
+            }
+
         }
         private void DspMesResultCh2(List<string> rslt)
         {
@@ -1674,7 +1741,7 @@ namespace BERT
             err = double.Parse(rslt[5]);
             //bit = dcnt3_Ch2;
             bit = dcnt1_Ch2;
-            es = (err / bit * 100);
+            es = err / bit;
             if (es == 0)
             {
                 //wstr1 = dcnt3_Ch2.ToString("0.00E00");
@@ -1715,6 +1782,13 @@ namespace BERT
             else
             {
                 PBOX_ERR_FLG_CH2.Image = PBOX_ERR_FLG_CH2.ErrorImage;
+            }
+
+            if (CMB_PN_CH2.SelectedIndex == 4)
+            {
+                var str = Properties.Settings.Default.ProgramPatternCH2;
+                string[] len = str.Split(',');
+                LAB_LENGTH_CH2_Val.Text = len[9];
             }
         }
 
@@ -1764,7 +1838,7 @@ namespace BERT
             err = double.Parse(rslt[5]);
             //bit = dcnt3_Ch3;
             bit = dcnt1_Ch3;
-            es = (err / bit * 100);
+            es = err / bit;
             if (es == 0)
             {
                 //wstr1 = dcnt3_Ch3.ToString("0.00E00");
@@ -1805,6 +1879,13 @@ namespace BERT
             else
             {
                 PBOX_ERR_FLG_CH3.Image = PBOX_ERR_FLG_CH3.ErrorImage;
+            }
+
+            if (CMB_PN_CH3.SelectedIndex == 4)
+            {
+                var str = Properties.Settings.Default.ProgramPatternCH3;
+                string[] len = str.Split(',');
+                LAB_LENGTH_CH3_Val.Text = len[9];
             }
         }
 
@@ -1854,7 +1935,7 @@ namespace BERT
             err = double.Parse(rslt[5]);
             bit = dcnt1_Ch4;
             //bit = dcnt3_Ch4;
-            es = (err / bit * 100);
+            es = err / bit;
             if (es == 0)
             {
                 wstr1 = dcnt1_Ch4.ToString("0.00E00");
@@ -1896,6 +1977,13 @@ namespace BERT
             {
                 PBOX_ERR_FLG_CH4.Image = PBOX_ERR_FLG_CH4.ErrorImage;
             }
+
+            if (CMB_PN_CH4.SelectedIndex == 4)
+            {
+                var str = Properties.Settings.Default.ProgramPatternCH4;
+                string[] len = str.Split(',');
+                LAB_LENGTH_CH4_Val.Text = len[9];
+            }
         }
 
         private void GetResult_Tick(object sender, EventArgs e)
@@ -1914,7 +2002,7 @@ namespace BERT
                 else
                 {
                     BTN_TX_OUT_CH1.Text = "OFF";
-                    BTN_TX_OUT_CH1.BackColor = Color.Red;
+                    BTN_TX_OUT_CH1.BackColor = SystemColors.Control;
                     PBOX_Tx_STS_1.Image = BERT.Properties.Resources.led_red;
                     TxCh1Flag = false;
                 }
@@ -1928,7 +2016,7 @@ namespace BERT
                 else
                 {
                     BTN_TX_OUT_CH2.Text = "OFF";
-                    BTN_TX_OUT_CH2.BackColor = Color.Red;
+                    BTN_TX_OUT_CH2.BackColor = SystemColors.Control;
                     PBOX_Tx_STS_2.Image = BERT.Properties.Resources.led_red;
                     TxCh2Flag = false;
                 }
@@ -1946,7 +2034,7 @@ namespace BERT
                 else
                 {
                     BTN_TX_OUT_CH3.Text = "OFF";
-                    BTN_TX_OUT_CH3.BackColor = Color.Red;
+                    BTN_TX_OUT_CH3.BackColor = SystemColors.Control;
                     PBOX_Tx_STS_3.Image = BERT.Properties.Resources.led_red;
                     TxCh3Flag = false;
                 }
@@ -1960,7 +2048,7 @@ namespace BERT
                 else
                 {
                     BTN_TX_OUT_CH4.Text = "OFF";
-                    BTN_TX_OUT_CH4.BackColor = Color.Red;
+                    BTN_TX_OUT_CH4.BackColor = SystemColors.Control;
                     PBOX_Tx_STS_4.Image = BERT.Properties.Resources.led_red;
                     TxCh4Flag = false;
                 }
@@ -1975,7 +2063,8 @@ namespace BERT
                     if (rslt == null)
                     {
                         GetResult.Stop();
-                        BTN_MES_CH1.Text = "START";
+                        BTN_MES_CH1.Text = "ON";
+                        BTN_MES_CH1.BackColor = Color.Lime;
                         MesCh1Flag = false;
                         MesCh2Flag = false;
                         this.bertPort1.Close();
@@ -2000,7 +2089,8 @@ namespace BERT
                 catch (Exception) 
                 {
                     GetResult.Stop();
-                    BTN_MES_CH1.Text = "START";
+                    BTN_MES_CH1.Text = "ON";
+                    BTN_MES_CH1.BackColor = Color.Lime;
                     MesCh1Flag = false;
                     MesCh2Flag = false;
                     this.bertPort1.Close();
@@ -2029,7 +2119,8 @@ namespace BERT
                     if (rslt == null)
                     {
                         GetResult.Stop();
-                        BTN_MES_CH2.Text = "START";
+                        BTN_MES_CH2.Text = "ON";
+                        BTN_MES_CH1.BackColor = Color.Lime;
                         MesCh1Flag = false;
                         MesCh2Flag = false;
                         this.bertPort1.Close();
@@ -2052,7 +2143,8 @@ namespace BERT
                 catch (Exception )
                 {
                     GetResult.Stop();
-                    BTN_MES_CH2.Text = "START";
+                    BTN_MES_CH2.Text = "ON";
+                    BTN_MES_CH1.BackColor = Color.Lime;
                     MesCh1Flag = false;
                     MesCh2Flag = false;
                     this.bertPort1.Close();
@@ -2079,8 +2171,9 @@ namespace BERT
 
                     if (rslt == null)
                     {
-                        GetResult.Stop();
-                        BTN_MES_CH3.Text = "START";
+                        GetResult.Stop();   
+                        BTN_MES_CH3.Text = "ON";
+                        BTN_MES_CH1.BackColor = Color.Lime;
                         MesCh3Flag = false;
                         MesCh4Flag = false;
                         this.bertPort1.Close();
@@ -2105,7 +2198,8 @@ namespace BERT
                 catch (Exception)
                 {
                     GetResult.Stop();
-                    BTN_MES_CH3.Text = "START";
+                    BTN_MES_CH3.Text = "ON";
+                    BTN_MES_CH1.BackColor = Color.Lime;
                     MesCh3Flag = false;
                     MesCh4Flag = false;
                     this.bertPort2.Close();
@@ -2135,7 +2229,8 @@ namespace BERT
                     if (rslt == null)
                     {
                         GetResult.Stop();
-                        BTN_MES_CH4.Text = "START";
+                        BTN_MES_CH4.Text = "ON";
+                        BTN_MES_CH1.BackColor = Color.Lime;
                         MesCh3Flag = false;
                         MesCh4Flag = false;
                         this.bertPort2.Close();
@@ -2160,7 +2255,8 @@ namespace BERT
                 catch (Exception)
                 {
                     GetResult.Stop();
-                    BTN_MES_CH3.Text = "START";
+                    BTN_MES_CH3.Text = "ON";
+                    BTN_MES_CH1.BackColor = Color.Lime;
                     MesCh3Flag = false;
                     MesCh4Flag = false;
                     this.bertPort2.Close();
@@ -2215,6 +2311,7 @@ namespace BERT
                     case "PROGRAM":
                         SetProgramPatternCH(1);
                         LAB_LENGTH_CH1_Val.Text = GetProgramPatternLength(1);
+                        ptn = "prg";
                         break;
                 }
                 len = LAB_LENGTH_CH1_Val.Text;
@@ -2260,6 +2357,7 @@ namespace BERT
                     case "PROGRAM":
                         SetProgramPatternCH(2);
                         LAB_LENGTH_CH2_Val.Text = GetProgramPatternLength(2);
+                        ptn = "prg";
                         break;
                 }
                 len = LAB_LENGTH_CH2_Val.Text;
@@ -2311,6 +2409,7 @@ namespace BERT
                     case "PROGRAM":
                         SetProgramPatternCH(3);
                         LAB_LENGTH_CH3_Val.Text = GetProgramPatternLength(3);
+                        ptn = "prg";
                         break;
                 }
                 len = LAB_LENGTH_CH3_Val.Text;
@@ -2361,6 +2460,7 @@ namespace BERT
                     case "PROGRAM":
                         SetProgramPatternCH(4);
                         LAB_LENGTH_CH4_Val.Text = GetProgramPatternLength(4);
+                        ptn = "prg";
                         break;
                 }
                 len = LAB_LENGTH_CH4_Val.Text;
@@ -2604,132 +2704,195 @@ namespace BERT
         {
             try
             {
-                String chInfo = "";
-
-                if (isConnecting)
+                if (isEther)
                 {
-                    string msg;
+                    String chInfo = "";
 
-                    try
+                    if (isConnecting)
                     {
-                        await this.preBertPort1.Open();
-                    }
-                    catch(Exception ex)
-                    {
-                        msg = "BERT装置への接続ができませんでした。\n装置の接続を確認してください。";
-                        MessageBox.Show(msg, "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-                    Thread.Sleep(500);
+                        string msg;
 
-                    try
-                    {
-                        await this.preBertPort2.Open();
-                    }
-                    catch (Exception ex)
-                    {
-                        msg = "BERT装置への接続ができませんでした。\n装置の接続を確認してください。";
-                        MessageBox.Show(msg, "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-                    Thread.Sleep(500);
+                        try
+                        {
+                            await this.preBertPort1.Open();
+                        }
+                        catch (Exception ex)
+                        {
+                            msg = "BERT装置への接続ができませんでした。\n装置の接続を確認してください。";
+                            MessageBox.Show(msg, "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                        Thread.Sleep(500);
 
-                    chInfo = Commands.GetCH(preBertPort1);
-                    if (chInfo == "1-2")
-                    {
-                        bertPort1 = preBertPort1;
-                        CBOX_COM1.SelectedIndex = COMConnectPortIndex(preBertPort1);
-                    }
-                    else if(chInfo == "3-4")
-                    {
-                        bertPort2 = preBertPort1;
-                        CBOX_COM2.SelectedIndex = COMConnectPortIndex(preBertPort1);
+                        try
+                        {
+                            await this.preBertPort2.Open();
+                        }
+                        catch (Exception ex)
+                        {
+                            msg = "BERT装置への接続ができませんでした。\n装置の接続を確認してください。";
+                            MessageBox.Show(msg, "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                        Thread.Sleep(500);
+
+                        chInfo = Commands.GetCH(preBertPort1);
+                        if (chInfo == "1-2")
+                        {
+                            bertPort1 = preBertPort1;
+                            CBOX_COM1.SelectedIndex = COMConnectPortIndex(preBertPort1);
+                        }
+                        else if (chInfo == "3-4")
+                        {
+                            bertPort2 = preBertPort1;
+                            CBOX_COM2.SelectedIndex = COMConnectPortIndex(preBertPort1);
+                        }
+                        else
+                        {
+                            msg = "COMポートCH情報が取得できませんでした";
+                            MessageBox.Show(msg, "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            BTN_ETHER_Connect.Text = "CONNECT";
+                            BTN_COM_Connect.Text = "CONNECT";
+                            CBOX_COM1.Enabled = true;
+                            CBOX_COM2.Enabled = true;
+                            TXT_IPAdr1.Enabled = true;
+                            TXT_IPAdr2.Enabled = true;
+                            BTN_COM_IF_CHG.Enabled = true;
+                            BTN_ETH_IF_CHG.Enabled = true;
+                            PAN_Form_Main.Enabled = false;
+                            preBertPort1.Close();
+                            return false;
+                        }
+                        chInfo = Commands.GetCH(preBertPort2);
+                        if (chInfo == "1-2")
+                        {
+                            bertPort1 = preBertPort2;
+                            CBOX_COM1.SelectedIndex = COMConnectPortIndex(preBertPort2);
+                        }
+                        else if (chInfo == "3-4")
+                        {
+                            bertPort2 = preBertPort2;
+                            CBOX_COM2.SelectedIndex = COMConnectPortIndex(preBertPort2);
+                        }
+                        else
+                        {
+                            msg = "COMポートCH情報が取得できませんでした";
+                            MessageBox.Show(msg, "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            CBOX_COM1.Enabled = true;
+                            CBOX_COM2.Enabled = true;
+                            TXT_IPAdr1.Enabled = true;
+                            TXT_IPAdr2.Enabled = true;
+                            BTN_COM_IF_CHG.Enabled = true;
+                            BTN_ETH_IF_CHG.Enabled = true;
+                            PAN_Form_Main.Enabled = false;
+                            preBertPort2.Close();
+                            return false;
+                        }
                     }
                     else
                     {
-                        msg = "COMポートCH情報が取得できませんでした";
-                        MessageBox.Show(msg, "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-                    chInfo = Commands.GetCH(preBertPort2);
-                    if (chInfo == "1-2")
-                    {
-                        bertPort1 = preBertPort2;
-                        CBOX_COM1.SelectedIndex = COMConnectPortIndex(preBertPort2);
-                    }
-                    else if (chInfo == "3-4")
-                    {
-                        bertPort2 = preBertPort2;
-                        CBOX_COM2.SelectedIndex = COMConnectPortIndex(preBertPort2);
-                    }
-                    else
-                    {
-                        msg = "COMポートCH情報が取得できませんでした";
-                        MessageBox.Show(msg, "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
+                        GetResult.Stop();
 
-                    this.isUiLoadOfConnecting = true;
-                    BitrateGUISet(Commands.GetBitrate(bertPort1));
-                    TriggerGUISet(Commands.GetTrigger(bertPort1));
-                    for (int ch = 0; ch < 2; ch++)
-                    {
-                        var chNumber = ch + 1;
-                        PPGGUISet(chNumber, Commands.GetPPG(bertPort1, chNumber));
-                        EdGUISet(chNumber, Commands.GetEd(bertPort1, chNumber));
-                        ReSyncModeSet(chNumber, Commands.GetReSyncMode(bertPort1, chNumber));
-                        EdPatSet(chNumber, Commands.GetEdPat(bertPort1, chNumber));
-                    }
-                    for (int ch = 0; ch < 2; ch++)
-                    {
-                        var chNumber = ch + 3;
-                        PPGGUISet(chNumber, Commands.GetPPG(bertPort2, ch+1));
-                        EdGUISet(chNumber, Commands.GetEd(bertPort2, ch+1));
-                        ReSyncModeSet(chNumber, Commands.GetReSyncMode(bertPort2, ch+1));
-                        EdPatSet(chNumber, Commands.GetEdPat(bertPort2, ch+1));
-                    }
+                        MesCh1Flag = false;
+                        MesCh2Flag = false;
+                        Thread.Sleep(1000);
+                        ClosingIF();
 
-                    this.DHCPFlag = Commands.GetDHCP(bertPort1) == "1";
+                        BTN_COM_IF_CHG.Enabled = true;
+                        BTN_ETH_IF_CHG.Enabled = true;
 
-                    Button button = null;
-                    string portType = "";
-                    if (isEther)
-                    {
-                        button = this.BTN_ETHER_Connect;
-                        portType = "Ethernet";
-                    }
-                    else
-                    {
-                        button = this.BTN_COM_Connect;
-                        portType = "COMポート";
-                    }
-                    this.updateConnected(button, button.Text == "CONNECT", portType);
-
-                    this.isUiLoadOfConnecting = false;
-                    BTN_COM_IF_CHG.Enabled = false;
-                    BTN_ETH_IF_CHG.Enabled = false;
-                    GetResult.Start();
-
-                    if (!MesCh1Flag && !MesCh2Flag && !MesCh3Flag && !MesCh4Flag)
-                    {
-                        programPatternSetPToolStripMenuItem.Enabled = true;
-                    }
-                    else 
-                    {
-                        programPatternSetPToolStripMenuItem.Enabled = false;
+                        return true;
                     }
                 }
                 else
                 {
-                    GetResult.Stop();
+                    if (isConnecting)
+                    {
+                        string msg;
+                        if (!await COMAutoSerch())
+                        {
+                            msg = "COMポートCH情報が取得できませんでした";
+                            MessageBox.Show(msg, "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            CBOX_COM1.Enabled = true;
+                            CBOX_COM2.Enabled = true;
+                            TXT_IPAdr1.Enabled = true;
+                            TXT_IPAdr2.Enabled = true;
+                            BTN_COM_IF_CHG.Enabled = true;
+                            BTN_ETH_IF_CHG.Enabled = true;
+                            PAN_Form_Main.Enabled = false;
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        GetResult.Stop();
 
-                    MesCh1Flag = false;
-                    MesCh2Flag = false;
-                    Thread.Sleep(1000);
-                    ClosingIF();
+                        MesCh1Flag = false;
+                        MesCh2Flag = false;
+                        Thread.Sleep(1000);
+                        ClosingIF();
 
-                    BTN_COM_IF_CHG.Enabled = true;
-                    BTN_ETH_IF_CHG.Enabled = true;
+                        BTN_COM_IF_CHG.Enabled = true;
+                        BTN_ETH_IF_CHG.Enabled = true;
+
+                        LAB_COM1_NAME.Text = "";
+                        LAB_COM2_NAME.Text = "";
+
+                        return true;
+                    }
+                }
+
+                this.isUiLoadOfConnecting = true;
+                
+                BitrateGUISet(Commands.GetBitrate(bertPort1));
+                TriggerGUISet(Commands.GetTrigger(bertPort1));
+                
+                for (int ch = 0; ch < 2; ch++)
+                {
+                    var chNumber = ch + 1;
+                    PPGGUISet(chNumber, Commands.GetPPG(bertPort1, chNumber));
+                    EdGUISet(chNumber, Commands.GetEd(bertPort1, chNumber));
+                    ReSyncModeSet(chNumber, Commands.GetReSyncMode(bertPort1, chNumber));
+                    EdPatSet(chNumber, Commands.GetEdPat(bertPort1, chNumber));
+                }
+                for (int ch = 0; ch < 2; ch++)
+                {
+                    var chNumber = ch + 3;
+                    PPGGUISet(chNumber, Commands.GetPPG(bertPort2, ch+1));
+                    EdGUISet(chNumber, Commands.GetEd(bertPort2, ch+1));
+                    ReSyncModeSet(chNumber, Commands.GetReSyncMode(bertPort2, ch+1));
+                    EdPatSet(chNumber, Commands.GetEdPat(bertPort2, ch+1));
+                }
+
+                this.DHCPFlag = Commands.GetDHCP(bertPort1) == "1";
+
+                Button button = null;
+                string portType = "";
+                if (isEther)
+                {
+                    button = this.BTN_ETHER_Connect;
+                    portType = "Ethernet";
+                }
+                else
+                {
+                    button = this.BTN_COM_Connect;
+                    portType = "COMポート";
+                }
+                
+                this.updateConnected(button, button.Text == "CONNECT", portType);
+
+                this.isUiLoadOfConnecting = false;
+                BTN_COM_IF_CHG.Enabled = false;
+                BTN_ETH_IF_CHG.Enabled = false;
+                GetResult.Start();
+                
+                if (!MesCh1Flag && !MesCh2Flag && !MesCh3Flag && !MesCh4Flag)
+                {
+                    programPatternSetPToolStripMenuItem.Enabled = true;
+                }
+                else 
+                {
+                    programPatternSetPToolStripMenuItem.Enabled = false;
                 }
                 return true;
             }
@@ -2738,6 +2901,7 @@ namespace BERT
                 if (isConnecting)
                 {
                     this.bertPort1.Close();
+                    this.bertPort2.Close();
                     string msg;
                     if (isEther)
                     {
@@ -2756,6 +2920,51 @@ namespace BERT
                 return false;
             }
         }
+
+        private async Task<bool> COMAutoSerch()
+        {
+            String chInfo = "";
+
+                for (int i = 0; i < CBOX_COM1.Items.Count; i++)
+                {
+                    BertPortSerial searchPort = new BertPortSerial("COM01");
+                    searchPort.BertPortNameSet(CBOX_COM1.Items[i].ToString());
+                    await searchPort.Open();
+                    chInfo = Commands.GetCH(searchPort);
+                    if (chInfo == "1-2")
+                    {
+                        bertPort1 = bertPortSerial1 = searchPort;
+                        CBOX_COM1.SelectedIndex = COMConnectPortIndex(searchPort);
+                        LAB_COM1_NAME.Text = bertPort1.Name;
+                    }
+                    else if (chInfo == "3-4")
+                    {
+                        bertPort2 = bertPortSerial2 = searchPort;
+                        CBOX_COM2.SelectedIndex = COMConnectPortIndex(searchPort);
+                        LAB_COM2_NAME.Text = bertPort2.Name;
+                }
+                    else
+                    {
+                        searchPort.Close();
+                    }
+                }
+
+                if(bertPort1 == null || bertPort2 == null)
+                {
+                    return false;
+                }
+
+                if (bertPort1.IsOpen && bertPort2.IsOpen)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            return false;
+        }
+
 
         private int COMConnectPortIndex(BertPortBase preBertPort1) 
         {
@@ -2999,7 +3208,7 @@ namespace BERT
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH1.Text = "OFF";
-                        BTN_TX_OUT_CH1.BackColor = Color.Red;
+                        BTN_TX_OUT_CH1.BackColor = SystemColors.Control;
                         TxCh1Flag = false;
                         PBOX_Tx_STS_1.Image = BERT.Properties.Resources.led_red;
                     }
@@ -3007,7 +3216,7 @@ namespace BERT
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH2.Text = "OFF";
-                        BTN_TX_OUT_CH2.BackColor = Color.Red;
+                        BTN_TX_OUT_CH2.BackColor = SystemColors.Control;
                         TxCh2Flag = false;
                         PBOX_Tx_STS_2.Image = BERT.Properties.Resources.led_red;
                     }
@@ -3015,7 +3224,7 @@ namespace BERT
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH3.Text = "OFF";
-                        BTN_TX_OUT_CH3.BackColor = Color.Red;
+                        BTN_TX_OUT_CH3.BackColor = SystemColors.Control;
                         TxCh3Flag = false;
                         PBOX_Tx_STS_3.Image = BERT.Properties.Resources.led_red;
                     }
@@ -3023,13 +3232,13 @@ namespace BERT
                     if (rslt == "OK")
                     {
                         BTN_TX_OUT_CH4.Text = "OFF";
-                        BTN_TX_OUT_CH4.BackColor = Color.Red;
+                        BTN_TX_OUT_CH4.BackColor = SystemColors.Control;
                         TxCh4Flag = false;
                         PBOX_Tx_STS_4.Image = BERT.Properties.Resources.led_red;
                     }
 
-                    BTN_ALL_TX.Text = "OFF";
-                    BTN_ALL_TX.BackColor = Color.Red;
+                    BTN_ALL_TX.Text = "ON";
+                    //BTN_ALL_TX.BackColor = Color.Red;
                     TxAllFlag = false;
                 }
                 else
@@ -3078,8 +3287,8 @@ namespace BERT
                         PBOX_Tx_STS_4.Image = BERT.Properties.Resources.led_green;
                     }
 
-                    BTN_ALL_TX.Text = "ON";
-                    BTN_ALL_TX.BackColor = Color.Lime;
+                    BTN_ALL_TX.Text = "OFF";
+                    //BTN_ALL_TX.BackColor = Color.Lime;
                     TxAllFlag = true;
                 }
             }
@@ -3094,8 +3303,43 @@ namespace BERT
 
         private void programPatternSetPToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
+            string len = "";
+            string rslt = "";
+
             var form = new ProgramPatternSetting();
             form.ShowDialog();
+            if(form.SetFlag)
+            {
+                if(CMB_PN_CH1.SelectedIndex == 4)
+                {
+                    len = GetProgramPatternLength(1);
+                    rslt = Commands.SetPpgPat(bertPort1, 1, "prg", len.ToLower());
+                    rslt = Commands.SetEdPat(bertPort1, 1, "prg", len.ToLower());
+                    LAB_LENGTH_CH1_Val.Text = len;
+                }
+                if (CMB_PN_CH2.SelectedIndex == 4)
+                {
+                    len = GetProgramPatternLength(2);
+                    rslt = Commands.SetPpgPat(bertPort1, 2, "prg", len.ToLower());
+                    rslt = Commands.SetEdPat(bertPort1, 2, "prg", len.ToLower());
+                    LAB_LENGTH_CH2_Val.Text = len;
+                }
+                if (CMB_PN_CH3.SelectedIndex == 4)
+                {
+                    len = GetProgramPatternLength(3);
+                    rslt = Commands.SetPpgPat(bertPort2, 1, "prg", len.ToLower());
+                    rslt = Commands.SetEdPat(bertPort2, 1, "prg", len.ToLower());
+                    LAB_LENGTH_CH3_Val.Text = len;
+                }
+                if (CMB_PN_CH4.SelectedIndex == 4)
+                {
+                    len = GetProgramPatternLength(4);
+                    rslt = Commands.SetPpgPat(bertPort2, 2, "prg", len.ToLower());
+                    rslt = Commands.SetEdPat(bertPort2, 2, "prg", len.ToLower());
+                    LAB_LENGTH_CH4_Val.Text = len;
+                }
+
+            }
             form.Dispose();
         }
 
@@ -3110,29 +3354,33 @@ namespace BERT
                     ret = Commands.SetEd(bertPort1, 1, 0);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH1.Text = "START";
+                        BTN_MES_CH1.Text = "OFF";
+                        BTN_MES_CH1.BackColor = SystemColors.Control;
                         MesCh1Flag = false;
                     }
                     ret = Commands.SetEd(bertPort1, 2, 0);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH2.Text = "START";
+                        BTN_MES_CH2.Text = "OFF";
+                        BTN_MES_CH2.BackColor = SystemColors.Control;
                         MesCh2Flag = false;
                     }
                     ret = Commands.SetEd(bertPort2, 1, 0);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH3.Text = "START";
+                        BTN_MES_CH3.Text = "OFF";
+                        BTN_MES_CH3.BackColor = SystemColors.Control;
                         MesCh3Flag = false;
                     }
                     ret = Commands.SetEd(bertPort2, 2, 0);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH4.Text = "START";
+                        BTN_MES_CH4.Text = "OFF";
+                        BTN_MES_CH4.BackColor = SystemColors.Control;
                         MesCh4Flag = false;
                     }
 
-                    BTN_ALL_MEASURE.Text = "START";
+                    BTN_ALL_MEASURE.Text = "ON";
                     MesAllFlag = false;
                     
                     if (!MesCh1Flag && !MesCh2Flag && !MesCh3Flag && !MesCh4Flag)
@@ -3145,29 +3393,33 @@ namespace BERT
                     ret = Commands.SetEd(bertPort1, 1, 1);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH1.Text = "STOP";
+                        BTN_MES_CH1.Text = "ON";
+                        BTN_MES_CH1.BackColor = Color.Lime;
                         MesCh1Flag = true;
                     }
                     ret = Commands.SetEd(bertPort1, 2, 1);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH2.Text = "STOP";
+                        BTN_MES_CH2.Text = "ON";
+                        BTN_MES_CH2.BackColor = Color.Lime;
                         MesCh2Flag = true;
                     }
                     ret = Commands.SetEd(bertPort2, 1, 1);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH3.Text = "STOP";
+                        BTN_MES_CH3.Text = "ON";
+                        BTN_MES_CH3.BackColor = Color.Lime;
                         MesCh3Flag = true;
                     }
                     ret = Commands.SetEd(bertPort2, 2, 1);
                     if (ret == "OK")
                     {
-                        BTN_MES_CH4.Text = "STOP";
+                        BTN_MES_CH4.Text = "ON";
+                        BTN_MES_CH4.BackColor = Color.Lime;
                         MesCh4Flag = true;
                     }
 
-                    BTN_ALL_MEASURE.Text = "STOP";
+                    BTN_ALL_MEASURE.Text = "OFF";
                     MesAllFlag = true;
 
                     if (MesCh1Flag || MesCh2Flag || MesCh3Flag || MesCh4Flag) 
@@ -3343,6 +3595,426 @@ namespace BERT
                                         MessageBoxButtons.OK,
                                             (MessageBoxIcon)Enum.Parse(typeof(MessageBoxIcon), "Error"));
                 return;
+            }
+        }
+
+        private void CBOX_BR_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // 項目がない場合は処理を終了
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            // ComboBoxオブジェクトを取得
+            ComboBox comboBox = sender as ComboBox;
+
+            // 描画するテキストを取得
+            string text = comboBox.Items[e.Index].ToString();
+
+            // 選択状態かどうかで背景色を決定
+            Brush textBrush = SystemBrushes.ControlText; // 通常のテキスト色
+            Brush backBrush = SystemBrushes.Window; // 通常の背景色
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText; // 選択されたテキスト色
+                backBrush = SystemBrushes.Highlight;     // 選択された背景色
+            }
+
+            // 背景を描画
+            e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            // テキスト描画のフォーマットを設定
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;     // 水平方向の中央揃え
+            sf.LineAlignment = StringAlignment.Center; // 垂直方向の中央揃え
+
+            // テキストを描画
+            e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds, sf);
+
+            // フォーカス枠を描画（選択項目用）
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void CMB_Trg_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // 項目がない場合は処理を終了
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            // ComboBoxオブジェクトを取得
+            ComboBox comboBox = sender as ComboBox;
+
+            // 描画するテキストを取得
+            string text = comboBox.Items[e.Index].ToString();
+
+            // 選択状態かどうかで背景色を決定
+            Brush textBrush = SystemBrushes.ControlText; // 通常のテキスト色
+            Brush backBrush = SystemBrushes.Window; // 通常の背景色
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText; // 選択されたテキスト色
+                backBrush = SystemBrushes.Highlight;     // 選択された背景色
+            }
+
+            // 背景を描画
+            e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            // テキスト描画のフォーマットを設定
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;     // 水平方向の中央揃え
+            sf.LineAlignment = StringAlignment.Center; // 垂直方向の中央揃え
+
+            // テキストを描画
+            e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds, sf);
+
+            // フォーカス枠を描画（選択項目用）
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void CBOX_ReSync_Mode_CH1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // 項目がない場合は処理を終了
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            // ComboBoxオブジェクトを取得
+            ComboBox comboBox = sender as ComboBox;
+
+            // 描画するテキストを取得
+            string text = comboBox.Items[e.Index].ToString();
+
+            // 選択状態かどうかで背景色を決定
+            Brush textBrush = SystemBrushes.ControlText; // 通常のテキスト色
+            Brush backBrush = SystemBrushes.Window; // 通常の背景色
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText; // 選択されたテキスト色
+                backBrush = SystemBrushes.Highlight;     // 選択された背景色
+            }
+
+            // 背景を描画
+            e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            // テキスト描画のフォーマットを設定
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;     // 水平方向の中央揃え
+            sf.LineAlignment = StringAlignment.Center; // 垂直方向の中央揃え
+
+            // テキストを描画
+            e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds, sf);
+
+            // フォーカス枠を描画（選択項目用）
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void CMB_PN_CH1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // 項目がない場合は処理を終了
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            // ComboBoxオブジェクトを取得
+            ComboBox comboBox = sender as ComboBox;
+
+            // 描画するテキストを取得
+            string text = comboBox.Items[e.Index].ToString();
+
+            // 選択状態かどうかで背景色を決定
+            Brush textBrush = SystemBrushes.ControlText; // 通常のテキスト色
+            Brush backBrush = SystemBrushes.Window; // 通常の背景色
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText; // 選択されたテキスト色
+                backBrush = SystemBrushes.Highlight;     // 選択された背景色
+            }
+
+            // 背景を描画
+            e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            // テキスト描画のフォーマットを設定
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;     // 水平方向の中央揃え
+            sf.LineAlignment = StringAlignment.Center; // 垂直方向の中央揃え
+
+            // テキストを描画
+            e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds, sf);
+
+            // フォーカス枠を描画（選択項目用）
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void CBOX_ReSync_Mode_CH2_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // 項目がない場合は処理を終了
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            // ComboBoxオブジェクトを取得
+            ComboBox comboBox = sender as ComboBox;
+
+            // 描画するテキストを取得
+            string text = comboBox.Items[e.Index].ToString();
+
+            // 選択状態かどうかで背景色を決定
+            Brush textBrush = SystemBrushes.ControlText; // 通常のテキスト色
+            Brush backBrush = SystemBrushes.Window; // 通常の背景色
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText; // 選択されたテキスト色
+                backBrush = SystemBrushes.Highlight;     // 選択された背景色
+            }
+
+            // 背景を描画
+            e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            // テキスト描画のフォーマットを設定
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;     // 水平方向の中央揃え
+            sf.LineAlignment = StringAlignment.Center; // 垂直方向の中央揃え
+
+            // テキストを描画
+            e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds, sf);
+
+            // フォーカス枠を描画（選択項目用）
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void CMB_PN_CH2_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // 項目がない場合は処理を終了
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            // ComboBoxオブジェクトを取得
+            ComboBox comboBox = sender as ComboBox;
+
+            // 描画するテキストを取得
+            string text = comboBox.Items[e.Index].ToString();
+
+            // 選択状態かどうかで背景色を決定
+            Brush textBrush = SystemBrushes.ControlText; // 通常のテキスト色
+            Brush backBrush = SystemBrushes.Window; // 通常の背景色
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText; // 選択されたテキスト色
+                backBrush = SystemBrushes.Highlight;     // 選択された背景色
+            }
+
+            // 背景を描画
+            e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            // テキスト描画のフォーマットを設定
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;     // 水平方向の中央揃え
+            sf.LineAlignment = StringAlignment.Center; // 垂直方向の中央揃え
+
+            // テキストを描画
+            e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds, sf);
+
+            // フォーカス枠を描画（選択項目用）
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void CBOX_ReSync_Mode_CH3_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // 項目がない場合は処理を終了
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            // ComboBoxオブジェクトを取得
+            ComboBox comboBox = sender as ComboBox;
+
+            // 描画するテキストを取得
+            string text = comboBox.Items[e.Index].ToString();
+
+            // 選択状態かどうかで背景色を決定
+            Brush textBrush = SystemBrushes.ControlText; // 通常のテキスト色
+            Brush backBrush = SystemBrushes.Window; // 通常の背景色
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText; // 選択されたテキスト色
+                backBrush = SystemBrushes.Highlight;     // 選択された背景色
+            }
+
+            // 背景を描画
+            e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            // テキスト描画のフォーマットを設定
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;     // 水平方向の中央揃え
+            sf.LineAlignment = StringAlignment.Center; // 垂直方向の中央揃え
+
+            // テキストを描画
+            e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds, sf);
+
+            // フォーカス枠を描画（選択項目用）
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void CMB_PN_CH3_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // 項目がない場合は処理を終了
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            // ComboBoxオブジェクトを取得
+            ComboBox comboBox = sender as ComboBox;
+
+            // 描画するテキストを取得
+            string text = comboBox.Items[e.Index].ToString();
+
+            // 選択状態かどうかで背景色を決定
+            Brush textBrush = SystemBrushes.ControlText; // 通常のテキスト色
+            Brush backBrush = SystemBrushes.Window; // 通常の背景色
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText; // 選択されたテキスト色
+                backBrush = SystemBrushes.Highlight;     // 選択された背景色
+            }
+
+            // 背景を描画
+            e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            // テキスト描画のフォーマットを設定
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;     // 水平方向の中央揃え
+            sf.LineAlignment = StringAlignment.Center; // 垂直方向の中央揃え
+
+            // テキストを描画
+            e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds, sf);
+
+            // フォーカス枠を描画（選択項目用）
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void CBOX_ReSync_Mode_CH4_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // 項目がない場合は処理を終了
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            // ComboBoxオブジェクトを取得
+            ComboBox comboBox = sender as ComboBox;
+
+            // 描画するテキストを取得
+            string text = comboBox.Items[e.Index].ToString();
+
+            // 選択状態かどうかで背景色を決定
+            Brush textBrush = SystemBrushes.ControlText; // 通常のテキスト色
+            Brush backBrush = SystemBrushes.Window; // 通常の背景色
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText; // 選択されたテキスト色
+                backBrush = SystemBrushes.Highlight;     // 選択された背景色
+            }
+
+            // 背景を描画
+            e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            // テキスト描画のフォーマットを設定
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;     // 水平方向の中央揃え
+            sf.LineAlignment = StringAlignment.Center; // 垂直方向の中央揃え
+
+            // テキストを描画
+            e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds, sf);
+
+            // フォーカス枠を描画（選択項目用）
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void CMB_PN_CH4_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // 項目がない場合は処理を終了
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            // ComboBoxオブジェクトを取得
+            ComboBox comboBox = sender as ComboBox;
+
+            // 描画するテキストを取得
+            string text = comboBox.Items[e.Index].ToString();
+
+            // 選択状態かどうかで背景色を決定
+            Brush textBrush = SystemBrushes.ControlText; // 通常のテキスト色
+            Brush backBrush = SystemBrushes.Window; // 通常の背景色
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText; // 選択されたテキスト色
+                backBrush = SystemBrushes.Highlight;     // 選択された背景色
+            }
+
+            // 背景を描画
+            e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            // テキスト描画のフォーマットを設定
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;     // 水平方向の中央揃え
+            sf.LineAlignment = StringAlignment.Center; // 垂直方向の中央揃え
+
+            // テキストを描画
+            e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds, sf);
+
+            // フォーカス枠を描画（選択項目用）
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
             }
         }
     }

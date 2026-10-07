@@ -64,7 +64,6 @@
             this.IP1_Txt.Name = "IP1_Txt";
             this.IP1_Txt.Size = new System.Drawing.Size(187, 28);
             this.IP1_Txt.TabIndex = 2;
-            this.IP1_Txt.Text = "192.168.1.10";
             // 
             // LAB_COM_Status
             // 
@@ -128,7 +127,6 @@
             this.MASK1_Txt.Name = "MASK1_Txt";
             this.MASK1_Txt.Size = new System.Drawing.Size(187, 28);
             this.MASK1_Txt.TabIndex = 13;
-            this.MASK1_Txt.Text = "255.255.255.0";
             // 
             // LAB_DGateway
             // 
@@ -147,7 +145,6 @@
             this.GW_Txt.Name = "GW_Txt";
             this.GW_Txt.Size = new System.Drawing.Size(187, 28);
             this.GW_Txt.TabIndex = 15;
-            this.GW_Txt.Text = "192.168.1.1";
             // 
             // CBOX_DHCP
             // 
@@ -168,7 +165,6 @@
             this.MASK2_Txt.Name = "MASK2_Txt";
             this.MASK2_Txt.Size = new System.Drawing.Size(187, 28);
             this.MASK2_Txt.TabIndex = 21;
-            this.MASK2_Txt.Text = "255.255.255.0";
             // 
             // LAB_IP2_MASK
             // 
@@ -187,7 +183,6 @@
             this.IP2_Txt.Name = "IP2_Txt";
             this.IP2_Txt.Size = new System.Drawing.Size(187, 28);
             this.IP2_Txt.TabIndex = 19;
-            this.IP2_Txt.Text = "192.168.1.10";
             // 
             // LAB_Ether2
             // 

@@ -32,10 +32,12 @@
             this.LAB_GUI_VER = new System.Windows.Forms.Label();
             this.LAB_FW = new System.Windows.Forms.Label();
             this.LAB_FW_VER = new System.Windows.Forms.Label();
-            this.LAB_MAC = new System.Windows.Forms.Label();
-            this.LAB_MAC_ADDR = new System.Windows.Forms.Label();
+            this.LAB_MAC1 = new System.Windows.Forms.Label();
+            this.LAB_MAC_ADDR1 = new System.Windows.Forms.Label();
             this.BTN_GET_VER = new System.Windows.Forms.Button();
             this.BTN_CLOSE = new System.Windows.Forms.Button();
+            this.LAB_MAC_ADDR2 = new System.Windows.Forms.Label();
+            this.LAB_MAC2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LAB_GUI
@@ -78,25 +80,25 @@
             this.LAB_FW_VER.TabIndex = 3;
             this.LAB_FW_VER.Text = "-.-.-";
             // 
-            // LAB_MAC
+            // LAB_MAC1
             // 
-            this.LAB_MAC.AutoSize = true;
-            this.LAB_MAC.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.LAB_MAC.Location = new System.Drawing.Point(26, 131);
-            this.LAB_MAC.Name = "LAB_MAC";
-            this.LAB_MAC.Size = new System.Drawing.Size(143, 20);
-            this.LAB_MAC.TabIndex = 4;
-            this.LAB_MAC.Text = "MAC  Address : ";
+            this.LAB_MAC1.AutoSize = true;
+            this.LAB_MAC1.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.LAB_MAC1.Location = new System.Drawing.Point(26, 131);
+            this.LAB_MAC1.Name = "LAB_MAC1";
+            this.LAB_MAC1.Size = new System.Drawing.Size(154, 20);
+            this.LAB_MAC1.TabIndex = 4;
+            this.LAB_MAC1.Text = "MAC  Address 1: ";
             // 
-            // LAB_MAC_ADDR
+            // LAB_MAC_ADDR1
             // 
-            this.LAB_MAC_ADDR.AutoSize = true;
-            this.LAB_MAC_ADDR.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.LAB_MAC_ADDR.Location = new System.Drawing.Point(185, 131);
-            this.LAB_MAC_ADDR.Name = "LAB_MAC_ADDR";
-            this.LAB_MAC_ADDR.Size = new System.Drawing.Size(123, 20);
-            this.LAB_MAC_ADDR.TabIndex = 5;
-            this.LAB_MAC_ADDR.Text = "--:--:--:--:--:--";
+            this.LAB_MAC_ADDR1.AutoSize = true;
+            this.LAB_MAC_ADDR1.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.LAB_MAC_ADDR1.Location = new System.Drawing.Point(185, 131);
+            this.LAB_MAC_ADDR1.Name = "LAB_MAC_ADDR1";
+            this.LAB_MAC_ADDR1.Size = new System.Drawing.Size(123, 20);
+            this.LAB_MAC_ADDR1.TabIndex = 5;
+            this.LAB_MAC_ADDR1.Text = "--:--:--:--:--:--";
             // 
             // BTN_GET_VER
             // 
@@ -112,7 +114,7 @@
             // BTN_CLOSE
             // 
             this.BTN_CLOSE.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.BTN_CLOSE.Location = new System.Drawing.Point(329, 164);
+            this.BTN_CLOSE.Location = new System.Drawing.Point(329, 202);
             this.BTN_CLOSE.Name = "BTN_CLOSE";
             this.BTN_CLOSE.Size = new System.Drawing.Size(87, 29);
             this.BTN_CLOSE.TabIndex = 7;
@@ -120,15 +122,37 @@
             this.BTN_CLOSE.UseVisualStyleBackColor = true;
             this.BTN_CLOSE.Click += new System.EventHandler(this.BTN_CLOSE_Click);
             // 
+            // LAB_MAC_ADDR2
+            // 
+            this.LAB_MAC_ADDR2.AutoSize = true;
+            this.LAB_MAC_ADDR2.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.LAB_MAC_ADDR2.Location = new System.Drawing.Point(185, 173);
+            this.LAB_MAC_ADDR2.Name = "LAB_MAC_ADDR2";
+            this.LAB_MAC_ADDR2.Size = new System.Drawing.Size(123, 20);
+            this.LAB_MAC_ADDR2.TabIndex = 9;
+            this.LAB_MAC_ADDR2.Text = "--:--:--:--:--:--";
+            // 
+            // LAB_MAC2
+            // 
+            this.LAB_MAC2.AutoSize = true;
+            this.LAB_MAC2.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.LAB_MAC2.Location = new System.Drawing.Point(26, 173);
+            this.LAB_MAC2.Name = "LAB_MAC2";
+            this.LAB_MAC2.Size = new System.Drawing.Size(154, 20);
+            this.LAB_MAC2.TabIndex = 8;
+            this.LAB_MAC2.Text = "MAC  Address 2: ";
+            // 
             // VersionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 205);
+            this.ClientSize = new System.Drawing.Size(443, 254);
+            this.Controls.Add(this.LAB_MAC_ADDR2);
+            this.Controls.Add(this.LAB_MAC2);
             this.Controls.Add(this.BTN_CLOSE);
             this.Controls.Add(this.BTN_GET_VER);
-            this.Controls.Add(this.LAB_MAC_ADDR);
-            this.Controls.Add(this.LAB_MAC);
+            this.Controls.Add(this.LAB_MAC_ADDR1);
+            this.Controls.Add(this.LAB_MAC1);
             this.Controls.Add(this.LAB_FW_VER);
             this.Controls.Add(this.LAB_FW);
             this.Controls.Add(this.LAB_GUI_VER);
@@ -149,9 +173,11 @@
         private System.Windows.Forms.Label LAB_GUI_VER;
         private System.Windows.Forms.Label LAB_FW;
         private System.Windows.Forms.Label LAB_FW_VER;
-        private System.Windows.Forms.Label LAB_MAC;
-        private System.Windows.Forms.Label LAB_MAC_ADDR;
+        private System.Windows.Forms.Label LAB_MAC1;
+        private System.Windows.Forms.Label LAB_MAC_ADDR1;
         private System.Windows.Forms.Button BTN_GET_VER;
         private System.Windows.Forms.Button BTN_CLOSE;
+        private System.Windows.Forms.Label LAB_MAC_ADDR2;
+        private System.Windows.Forms.Label LAB_MAC2;
     }
 }
